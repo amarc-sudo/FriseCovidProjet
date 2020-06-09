@@ -24,7 +24,7 @@ public class FileManager {
     private static File f = fsv.getDefaultDirectory();
 
     /**
-     * Methode de lecture d'un fichier serialisez. Si le nom du fichier n'existe pas alors il crée un nouvelle agenda
+     * Methode de lecture d'un fichier serialisez. Si le nom du fichier n'existe pas alors il crée une nouvelle chronologie
      * @param name
      */
     public static Chronologie load(String name){
@@ -80,6 +80,11 @@ public class FileManager {
         return chronologie;
     }
 
+    /**
+     * Sauvegarde une chronologie dans le repectoire ProjetCovid dans le dossier documents de la session en cours
+     * @param name
+     * @param chronologie
+     */
     public static void save(String name, Chronologie chronologie) {
         if (isWindows()) {
             try {

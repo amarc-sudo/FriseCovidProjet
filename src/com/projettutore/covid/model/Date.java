@@ -135,6 +135,14 @@ public class Date implements Comparable<Date>, Serializable {
     }
 
     /*
+    tostring
+     */
+
+    public String toString(){
+        return ""+ day + " " + month + " " + year;
+    }
+
+    /*
     Set and Get
      */
 

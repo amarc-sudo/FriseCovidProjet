@@ -12,7 +12,7 @@ public class Chronologie implements Serializable {
     private String titleChronologie;
 
     /**
-     *
+     *  Constructeur d'une chronologie
      * @param titleChronologie
      */
     public Chronologie(String titleChronologie){

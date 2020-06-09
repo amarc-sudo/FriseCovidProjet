@@ -1,6 +1,7 @@
 package com.projettutore.covid.model;
 
 import java.io.Serializable;
+import java.util.StringTokenizer;
 
 /**
  * Classe représentant un evenement
@@ -40,4 +41,26 @@ public class Event implements Comparable<Event>, Serializable {
     public String getPathToImg() {
         return pathToImg;
     }
+
+    public String toStringHtml(){
+        String returnStatement;
+        returnStatement = "<html>" +
+                "<h4><i>"+dateEvent.toString()+"</i></h4>" +
+                "<h3>"+title+"</h3>";
+        String descriptionHtml = "";
+        if(description != "") {
+            StringTokenizer st = new StringTokenizer(description);
+            int i = 0;
+            while (st.hasMoreTokens() && i < 12) {
+                descriptionHtml += st.nextToken();
+                if(i == 11){
+                    descriptionHtml+="<br>";
+                    i=0;
+                }
+            }
+        }
+        returnStatement += " " + descriptionHtml;
+        return returnStatement;
+    }
+
 }
