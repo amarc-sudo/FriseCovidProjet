@@ -26,6 +26,8 @@ public class PanelCovid extends JPanel {
      */
     public PanelCovid (){
         cardLayout = new CardLayout();
+        setLayout(cardLayout);
+        
     }
 
 
