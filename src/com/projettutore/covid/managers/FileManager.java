@@ -4,6 +4,7 @@ import com.projettutore.covid.model.Chronologie;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Classe gérant les sauvegardes
@@ -146,6 +147,26 @@ public class FileManager {
                 }
             }
         }
+    }
+
+
+
+    public static ArrayList<String> chronologieListe(){
+        File repertoire;
+        ArrayList<String> returnStatement = new ArrayList<String>();
+        if(isWindows())
+            repertoire = new File(f.toString() + "\\ProjetAgenda\\");
+        else
+            repertoire = new File(f.toString() + "/ProjetAgenda/");
+        File[] files=repertoire.listFiles();
+        if(files != null){
+            for (File file : files) {
+                if (file.toString().endsWith(".serial")) {
+                    returnStatement.add(file.toString());
+                }
+            }
+        }
+        return returnStatement;
     }
     /**
      * Methode qui renvoie un boolean true si l'os est Windows

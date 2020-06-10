@@ -7,6 +7,5 @@ import javax.swing.*;
  */
 public class PanelFile extends JPanel {
     public PanelFile(){
-
     }
 }
