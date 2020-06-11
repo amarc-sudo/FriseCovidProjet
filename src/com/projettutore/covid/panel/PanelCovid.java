@@ -28,12 +28,10 @@ public class PanelCovid extends JPanel {
     public PanelCovid (){
         cardLayout = new CardLayout();
         setLayout(cardLayout);
-        PanelCovid panelCovid = new PanelCovid();
-    	PanelDiapo panelDiapo = new PanelDiapo();
-    	PanelFile panelFile = new PanelFile();
+        PanelDiapo panelDiapo = new PanelDiapo();
     	PanelFrise panelFrise = new PanelFrise();
-        
-        Controler controler = new Controler(panelCovid, panelDiapo, panelFile, panelFrise);
+        PanelFormulaire panelFormulaire = new PanelFormulaire();
+        Controler controler = new Controler(panelDiapo, panelFormulaire,panelFrise);
         
     }
 

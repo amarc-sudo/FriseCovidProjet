@@ -22,23 +22,20 @@ public class Controler implements ActionListener{
 	
 	
 	/**
-	 * @param parPanelCovid
 	 * @param parPanelDiapo
-	 * @param parPanelFile
 	 * @param parPanelFrise
+	 * @param parPanelFormulaire
 	 * Les parametres en questions vont servir a Lier tout les Panel Avec la classe Controleur
 	 */
-	public Controler ( PanelCovid parPanelCovid ,PanelDiapo parPanelDiapo, PanelFile parPanelFile , PanelFrise parPanelFrise) {
-		panelCovid = parPanelCovid ;
+	public Controler (PanelDiapo parPanelDiapo , PanelFormulaire parPanelFormulaire, PanelFrise parPanelFrise) {
 		panelDiapo = parPanelDiapo ;
-		panelFile = parPanelFile;
 		panelFrise = parPanelFrise;
-		
+		/*
 		panelCovid.recordeListener(this);
 		panelDiapo.recordListener(this);
 		panelFile.recordListener(this);
-		panelFrise.recordListener(this);
-		
+		panelFrise.recordListener(this);*/
+
 	
 		
 	}

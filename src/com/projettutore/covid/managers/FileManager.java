@@ -150,7 +150,10 @@ public class FileManager {
     }
 
 
-
+    /**
+     * Methode qui renvoi une arrayList des noms des chronologie existante
+     * @return
+     */
     public static ArrayList<String> chronologieListe(){
         File repertoire;
         ArrayList<String> returnStatement = new ArrayList<String>();

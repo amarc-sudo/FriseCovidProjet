@@ -3,7 +3,7 @@ package com.projettutore.covid.frame;
 import javax.swing.*;
 
 import com.projettutore.covid.panel.PanelCovid;
-
+import com.projettutore.covid.panel.PanelSelection;
 
 
 /**
@@ -13,7 +13,7 @@ public class FrameCovid extends JFrame {
 
     public  FrameCovid(String parTitre){
     		super(parTitre);
-    		PanelCovid contentPane = new PanelCovid();
+    		PanelSelection contentPane = new PanelSelection(this);
     		setContentPane(contentPane);
     		setSize(1000,600);
     		setVisible(true);
@@ -25,7 +25,6 @@ public class FrameCovid extends JFrame {
     
 
     public static void main(String args[]) {
-    	
     	new FrameCovid("Notre foutu projet nique sa mere");
     }
 }
