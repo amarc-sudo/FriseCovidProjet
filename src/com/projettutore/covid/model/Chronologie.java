@@ -8,6 +8,8 @@ import java.util.HashMap;
  * @see Event
  */
 public class Chronologie implements Serializable {
+	private Date StartDate;
+	private Date EndDate;
     private HashMap<Date, Event> chronologieHashMap;
     private String titleChronologie;
 

@@ -1,6 +1,6 @@
 package com.projettutore.covid.panel;
 
-import com.projettutore.covid.controler.Controler;
+import com.projettutore.covid.controler.Controler_Covid;
 import com.projettutore.covid.model.Chronologie;
 
 import javax.swing.*;
@@ -31,7 +31,7 @@ public class PanelCovid extends JPanel {
         PanelDiapo panelDiapo = new PanelDiapo();
     	PanelFrise panelFrise = new PanelFrise();
         PanelFormulaire panelFormulaire = new PanelFormulaire();
-        Controler controler = new Controler(panelDiapo, panelFormulaire,panelFrise);
+        Controler_Covid controler = new Controler_Covid(panelDiapo, panelFormulaire,panelFrise);
         
     }
 

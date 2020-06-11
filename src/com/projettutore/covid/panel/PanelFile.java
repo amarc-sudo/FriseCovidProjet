@@ -1,5 +1,6 @@
 package com.projettutore.covid.panel;
 
+import com.projettutore.covid.controler.Controler_Selection;
 import com.projettutore.covid.managers.FileManager;
 
 import javax.swing.*;
@@ -46,5 +47,11 @@ public class PanelFile extends JPanel {
         buttonLoad = new JButton("charger");
         this.add(buttonLoad);
         //fin initialisation des boutons
+    }
+    
+    
+    public void  recordListener(Controler_Selection parControler) {
+    	buttonLoad.addActionListener(parControler);
+    	
     }
 }

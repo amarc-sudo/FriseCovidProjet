@@ -13,7 +13,7 @@ import com.projettutore.covid.panel.*;
  * C'est la callasse Controlleur permettant de rejoindre et de gerer tous les ActionListener necessaire et les traiter ainsi
  *
  */
-public class Controler implements ActionListener{
+public class Controler_Covid implements ActionListener{
 	
 	private PanelCovid panelCovid;
 	private PanelDiapo panelDiapo;
@@ -27,13 +27,11 @@ public class Controler implements ActionListener{
 	 * @param parPanelFormulaire
 	 * Les parametres en questions vont servir a Lier tout les Panel Avec la classe Controleur
 	 */
-	public Controler (PanelDiapo parPanelDiapo , PanelFormulaire parPanelFormulaire, PanelFrise parPanelFrise) {
+	public Controler_Covid (PanelDiapo parPanelDiapo , PanelFormulaire parPanelFormulaire, PanelFrise parPanelFrise) {
 		panelDiapo = parPanelDiapo ;
 		panelFrise = parPanelFrise;
 		/*
-		panelCovid.recordeListener(this);
 		panelDiapo.recordListener(this);
-		panelFile.recordListener(this);
 		panelFrise.recordListener(this);*/
 
 	

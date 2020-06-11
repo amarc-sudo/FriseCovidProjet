@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import com.projettutore.covid.controler.Controler;
+import com.projettutore.covid.controler.Controler_Covid;
 import com.projettutore.covid.model.Date;
 import com.projettutore.covid.model.Event;
 
@@ -185,7 +185,7 @@ public class PanelFormulaire extends JPanel {
 		}*/
 			
 		
-		public void recordListener (Controler parControler) { 
+		public void recordListener (Controler_Covid parControler) { 
 			JB_Plus.addActionListener (parControler);
 			
 		}
