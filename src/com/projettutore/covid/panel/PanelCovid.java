@@ -2,6 +2,8 @@ package com.projettutore.covid.panel;
 
 import com.projettutore.covid.controler.Controler;
 import com.projettutore.covid.model.Chronologie;
+import com.projettutore.covid.model.Date;
+import com.projettutore.covid.model.Event;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,14 +27,17 @@ public class PanelCovid extends JPanel {
     /**
      * Constructeur de base de la classe
      */
-    public PanelCovid (){
+    public PanelCovid (Chronologie chronologie){
+
+        //test a supprimer plus tard
+        chronologie = new Chronologie("test");
+        chronologie.add(new Event(new Date(),"Apparation en chine", "En 2019, est apparu en chine un nouveau virus onze douze treize quatorse", "15"));
         cardLayout = new CardLayout();
         setLayout(cardLayout);
-        PanelDiapo panelDiapo = new PanelDiapo();
-    	PanelFrise panelFrise = new PanelFrise();
+        PanelAffichage panelAffichage = new PanelAffichage(chronologie);
         PanelFormulaire panelFormulaire = new PanelFormulaire();
-        Controler controler = new Controler(panelDiapo, panelFormulaire,panelFrise);
-        
+        this.add(panelAffichage);
+        //Controler controler = new Controler(panelDiapo, panelFormulaire,panelFrise);
     }
 
 

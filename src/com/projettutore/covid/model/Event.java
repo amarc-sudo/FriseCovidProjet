@@ -52,11 +52,13 @@ public class Event implements Comparable<Event>, Serializable {
             StringTokenizer st = new StringTokenizer(description);
             int i = 0;
             while (st.hasMoreTokens() && i < 12) {
-                descriptionHtml += st.nextToken();
+                descriptionHtml += st.nextToken() + " ";
+                System.out.println(i);
                 if(i == 11){
-                    descriptionHtml+="<br>";
+                    descriptionHtml+=" <br> ";
                     i=0;
                 }
+                i++;
             }
         }
         returnStatement += " " + descriptionHtml;
