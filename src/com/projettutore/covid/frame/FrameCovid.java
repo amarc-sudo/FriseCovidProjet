@@ -2,6 +2,7 @@ package com.projettutore.covid.frame;
 
 import javax.swing.*;
 
+import com.projettutore.covid.model.Chronologie;
 import com.projettutore.covid.panel.PanelCovid;
 import com.projettutore.covid.panel.PanelSelection;
 
@@ -13,7 +14,8 @@ public class FrameCovid extends JFrame {
 
     public  FrameCovid(String parTitre){
     		super(parTitre);
-    		PanelSelection contentPane = new PanelSelection(this);
+    		//PanelSelection contentPane = new PanelSelection(this);
+    		PanelCovid contentPane = new PanelCovid(new Chronologie("test"));
     		setContentPane(contentPane);
     		setSize(1000,600);
     		setVisible(true);

@@ -2,6 +2,7 @@ package com.projettutore.covid.model;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * @see java.io.Serializable
@@ -35,5 +36,10 @@ public class Chronologie implements Serializable {
             this.chronologieHashMap.put(event.getDateEvent(), event);
             return true;
         }
+    }
+
+    public TreeMap<Date, Event> getTreeEvent(){
+        TreeMap<Date, Event> dateEventTreeMap = new TreeMap<>(chronologieHashMap);
+        return dateEventTreeMap;
     }
 }
