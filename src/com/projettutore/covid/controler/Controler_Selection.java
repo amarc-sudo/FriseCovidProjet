@@ -2,8 +2,10 @@ package com.projettutore.covid.controler;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import com.projettutore.covid.frame.FrameCovid;
+import com.projettutore.covid.managers.FileManager;
 import com.projettutore.covid.model.Chronologie;
 import com.projettutore.covid.panel.PanelCovid;
 import com.projettutore.covid.panel.PanelCreation;
@@ -49,10 +51,16 @@ import com.projettutore.covid.panel.PanelSelection;
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand() == "load") {
 				if(panelFile.getSelectedSave() != null){
-					PanelCovid panelCovid = new PanelCovid(new Chronologie("coucou"));
-					frameCovid.setCovidPane(new Chronologie("coucou"), panelCovid);
-
+					Chronologie chronologie = FileManager.load(panelFile.getSelectedSave());
+					PanelCovid panelCovid = new PanelCovid(chronologie);
+					frameCovid.setCovidPane(chronologie, panelCovid);
 				}
+			}
+			if(e.getActionCommand() == "add"){
+				Chronologie chronologie = panelCreation.getNewChronologie();
+				PanelCovid panelCovid = new PanelCovid(chronologie);
+				FileManager.save(chronologie.getTitle(), chronologie);
+				frameCovid.setCovidPane(chronologie, panelCovid);
 			}
 		}
 			

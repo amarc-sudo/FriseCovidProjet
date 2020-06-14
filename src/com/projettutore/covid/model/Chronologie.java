@@ -42,4 +42,7 @@ public class Chronologie implements Serializable {
         TreeMap<Date, Event> dateEventTreeMap = new TreeMap<>(chronologieHashMap);
         return dateEventTreeMap;
     }
+    public String getTitle(){
+        return titleChronologie;
+    }
 }

@@ -7,6 +7,8 @@ import java.awt.Insets;
 import javax.swing.*;
 
 import com.projettutore.covid.controler.Controler_Selection;
+import com.projettutore.covid.model.Chronologie;
+import com.projettutore.covid.model.Date;
 
 public class PanelCreation extends JPanel {
 	//JBUTTON
@@ -21,14 +23,14 @@ public class PanelCreation extends JPanel {
 	private JTextField JTF_Name = new JTextField();
 	
 	//JCOMBO BOX POUR LES DATES DE DEBUTS TEL QUE 1 ETANT POUR LA JCB DE LA DATE DE DEBUT
-	private JComboBox JCB_Year_1 = new JComboBox();
-	private JComboBox JCB_Month_1 = new JComboBox();
-	private JComboBox JCB_Day_1 = new JComboBox();
+	private JComboBox<Integer> JCB_Year_1 = new JComboBox();
+	private JComboBox<Integer> JCB_Month_1 = new JComboBox();
+	private JComboBox<Integer> JCB_Day_1 = new JComboBox();
 	
 	//JCOMBO BOX POUR LES DATES DE DEBUTS ET 2 POUR LA JCB DE LA DATE DE FIN 
-	private JComboBox JCB_Year_2 = new JComboBox();
-	private JComboBox JCB_Month_2 = new JComboBox();
-	private JComboBox JCB_Day_2 = new JComboBox();
+	private JComboBox<Integer> JCB_Year_2 = new JComboBox();
+	private JComboBox<Integer> JCB_Month_2 = new JComboBox();
+	private JComboBox<Integer> JCB_Day_2 = new JComboBox();
 	
 	private GridBagConstraints gbc = new GridBagConstraints();
 	
@@ -43,7 +45,7 @@ public class PanelCreation extends JPanel {
 		gbc.fill  = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(10,10,10,10);
 		add(JB_Add,gbc);
-		JB_Add.setName("add");
+		JB_Add.setActionCommand("add");
 		
 		//LINE 1
 		gbc.gridx = 0;
@@ -96,6 +98,13 @@ public class PanelCreation extends JPanel {
 		JCB_Month_2.addActionListener(parControler);
 		JCB_Day_2.addActionListener(parControler);
 		JB_Add.addActionListener(parControler);
+	}
+
+	public Chronologie getNewChronologie(){
+		/*
+		Date debut = new Date((int)JCB_Year_1.getSelectedItem(), (int)JCB_Month_1.getSelectedItem(), (int)JCB_Day_1.getSelectedItem());
+		Date fin = new Date((int)JCB_Year_2.getSelectedItem(), (int)JCB_Month_2.getSelectedItem(), (int)JCB_Day_2.getSelectedItem());*/
+		return new Chronologie(JTF_Name.getText());
 	}
 
 }

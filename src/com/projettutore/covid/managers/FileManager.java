@@ -32,8 +32,11 @@ public class FileManager {
         Chronologie chronologie = new Chronologie(name);
         if(isWindows()) {
             try {
-
-                FileInputStream fis = new FileInputStream(new File(f.toString() +"\\ProjetAgenda\\" + name+".serial"));
+                FileInputStream fis;
+                if(name.endsWith(".serial"))
+                    fis = new FileInputStream(new File(f.toString() +"\\ProjetCovid\\" + name));
+                else
+                    fis = new FileInputStream(new File(f.toString() +"\\ProjetCovid\\" + name+".serial"));
 
                 ObjectInputStream ois= new ObjectInputStream(fis);
                 try {
@@ -56,9 +59,12 @@ public class FileManager {
         }
         if(isUnix()) {
             try {
-
-                FileInputStream fis = new FileInputStream(new File(f.toString() +"/ProjetAgenda/" + name+".serial"));
-
+                FileInputStream fis;
+                if(name.endsWith(".serial")) {
+                    fis = new FileInputStream(new File(f.toString() + "/ProjetCovid/" + name));
+                }
+                else
+                    fis = new FileInputStream(new File(f.toString() + "/ProjetCovid/" + name + ".serial"));
                 ObjectInputStream ois= new ObjectInputStream(fis);
                 try {
 
@@ -88,54 +94,65 @@ public class FileManager {
      */
     public static void save(String name, Chronologie chronologie) {
         if (isWindows()) {
-            try {
-                FileOutputStream fos;
-                if(name.endsWith(".serial"))
-                    fos = new FileOutputStream(new File(f.toString() + "\\ProjetCovid\\" + name ));
-                else
-                    fos = new FileOutputStream(new File(f.toString() + "\\ProjetCovid\\" + name + ".serial"));
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
+            if(new File(f.toString() + "\\ProjetCovid\\").exists()) {
                 try {
-                    oos.writeObject(chronologie);
-                    oos.flush();
-                } finally {
+                    FileOutputStream fos;
+                    if (name.endsWith(".serial"))
+                        fos = new FileOutputStream(new File(f.toString() + "\\ProjetCovid\\" + name));
+                    else
+                        fos = new FileOutputStream(new File(f.toString() + "\\ProjetCovid\\" + name + ".serial"));
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
                     try {
-                        oos.close();
+                        oos.writeObject(chronologie);
+                        oos.flush();
                     } finally {
-                        fos.close();
+                        try {
+                            oos.close();
+                        } finally {
+                            fos.close();
+                        }
                     }
+                } catch (IOException ioe) {
                 }
-            } catch (IOException ioe) {
-
+            }
+            else{
+                createSave();
+                save(name, chronologie);
             }
         }
-        if (isUnix()) {
-            try {
-                FileOutputStream fos;
-                if(name.endsWith(".serial"))
-                    fos = new FileOutputStream(new File(f.toString() + "/ProjetCovid/" + name ));
-                else
-                    fos = new FileOutputStream(new File(f.toString() + "/ProjetCovid/" + name + ".serial"));
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
+        if(new File(f.toString() + "/ProjetCovid/").exists()) {
+            if (isUnix()) {
                 try {
-                    oos.writeObject(chronologie);
-                    oos.flush();
-                } finally {
-                    //fermeture des flux
+                    FileOutputStream fos;
+                    if (name.endsWith(".serial"))
+                        fos = new FileOutputStream(new File(f.toString() + "/ProjetCovid/" + name));
+                    else
+                        fos = new FileOutputStream(new File(f.toString() + "/ProjetCovid/" + name + ".serial"));
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
                     try {
-                        oos.close();
+                        oos.writeObject(chronologie);
+                        oos.flush();
                     } finally {
-                        fos.close();
+                        //fermeture des flux
+                        try {
+                            oos.close();
+                        } finally {
+                            fos.close();
+                        }
                     }
+                } catch (IOException ioe) {
                 }
-            } catch (IOException ioe) {
             }
+        }
+        else{
+            createSave();
+            save(name, chronologie);
         }
     }
     /**
      * fichier de création du directory de sauvegarde. est utilisé dans le constructeur.
      */
-    public void createSave(){
+    public static void createSave(){
         File file;
         if(isWindows()) {
             file = new File(f.toString() + "\\ProjetCovid");
@@ -166,9 +183,9 @@ public class FileManager {
         File repertoire;
         ArrayList<String> returnStatement = new ArrayList<String>();
         if(isWindows())
-            repertoire = new File(f.toString() + "\\ProjetAgenda\\");
+            repertoire = new File(f.toString() + "\\ProjetCovid\\");
         else
-            repertoire = new File(f.toString() + "/ProjetAgenda/");
+            repertoire = new File(f.toString() + "/ProjetCovid/");
         File[] files=repertoire.listFiles();
         if(files != null){
             for (File file : files) {
