@@ -1,4 +1,4 @@
-package com.projettutore.covid.panel;
+package com.projettutore.covid.panelchronologie;
 
 import com.projettutore.covid.model.Chronologie;
 

@@ -89,7 +89,11 @@ public class FileManager {
     public static void save(String name, Chronologie chronologie) {
         if (isWindows()) {
             try {
-                FileOutputStream fos = new FileOutputStream(new File(f.toString() + "\\ProjetCovid\\" + name + ".serial"));
+                FileOutputStream fos;
+                if(name.endsWith(".serial"))
+                    fos = new FileOutputStream(new File(f.toString() + "\\ProjetCovid\\" + name ));
+                else
+                    fos = new FileOutputStream(new File(f.toString() + "\\ProjetCovid\\" + name + ".serial"));
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
                 try {
                     oos.writeObject(chronologie);
@@ -107,7 +111,11 @@ public class FileManager {
         }
         if (isUnix()) {
             try {
-                FileOutputStream fos = new FileOutputStream(new File(f.toString() + "/ProjetCovid/" + name + ".serial"));
+                FileOutputStream fos;
+                if(name.endsWith(".serial"))
+                    fos = new FileOutputStream(new File(f.toString() + "/ProjetCovid/" + name ));
+                else
+                    fos = new FileOutputStream(new File(f.toString() + "/ProjetCovid/" + name + ".serial"));
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
                 try {
                     oos.writeObject(chronologie);
@@ -165,7 +173,7 @@ public class FileManager {
         if(files != null){
             for (File file : files) {
                 if (file.toString().endsWith(".serial")) {
-                    returnStatement.add(file.toString());
+                    returnStatement.add(((String)file.getName()));
                 }
             }
         }

@@ -14,7 +14,7 @@ public class PanelCreation extends JPanel {
 	
 	//JLABELS
 	private JLabel JL_Name = new JLabel("Nom de la chronologie",JLabel.CENTER);
-	private JLabel JL_DateDebut = new JLabel("Date de début",JLabel.CENTER);
+	private JLabel JL_DateDebut = new JLabel("Date de debut",JLabel.CENTER);
 	private JLabel JL_DateFin = new JLabel("Date de fin",JLabel.CENTER);
 	
 	//JTEXTEFIELD
@@ -43,13 +43,13 @@ public class PanelCreation extends JPanel {
 		gbc.fill  = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(10,10,10,10);
 		add(JB_Add,gbc);
+		JB_Add.setName("add");
 		
 		//LINE 1
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		
 		add(JL_Name,gbc);
-		
 		gbc.gridx = 1;
 		gbc.gridwidth = 3;
 		add(JTF_Name,gbc);
@@ -62,13 +62,13 @@ public class PanelCreation extends JPanel {
 		
 		gbc.gridx = 1;
 		add(JCB_Year_1,gbc);
-		
+		JCB_Year_1.setName("year1");
 		gbc.gridx = 2;
 		add(JCB_Month_1,gbc);
-		
+		JCB_Month_1.setName("month1");
 		gbc.gridx = 3;
 		add(JCB_Day_1,gbc);
-		
+		JCB_Day_1.setName("day1");
 		//lINE 3
 		gbc.gridx = 0;
 		gbc.gridy = 3;
@@ -76,13 +76,13 @@ public class PanelCreation extends JPanel {
 		
 		gbc.gridx = 1;
 		add(JCB_Year_2,gbc);
-				
+		JCB_Year_2.setName("year2");
 		gbc.gridx = 2;
 		add(JCB_Month_2,gbc);
-				
+		JCB_Month_2.setName("month2");
 		gbc.gridx = 3;
 		add(JCB_Day_2,gbc);
-		
+		JCB_Day_2.setName(("day2"));
 		
 		
 	}
@@ -92,11 +92,9 @@ public class PanelCreation extends JPanel {
 		JCB_Year_1.addActionListener(parControler);
 		JCB_Month_1.addActionListener(parControler);
 		JCB_Day_1.addActionListener(parControler);
-		
 		JCB_Year_2.addActionListener(parControler);
 		JCB_Month_2.addActionListener(parControler);
 		JCB_Day_2.addActionListener(parControler);
-		
 		JB_Add.addActionListener(parControler);
 	}
 

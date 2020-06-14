@@ -14,8 +14,8 @@ public class FrameCovid extends JFrame {
 
     public  FrameCovid(String parTitre){
     		super(parTitre);
-    		//PanelSelection contentPane = new PanelSelection(this);
-    		PanelCovid contentPane = new PanelCovid(new Chronologie("test"));
+    		PanelSelection contentPane = new PanelSelection(this);
+    		//PanelCovid contentPane = new PanelCovid(new Chronologie("test"));
     		setContentPane(contentPane);
     		setSize(1000,600);
     		setVisible(true);
@@ -23,7 +23,11 @@ public class FrameCovid extends JFrame {
     		setLocation(200,200);
     	}
     		
-
+	public void setCovidPane(Chronologie chronologie, PanelCovid contentPane){
+    	getContentPane().removeAll();
+    	setContentPane(contentPane);
+    	setVisible(true);
+	}
     
 
     public static void main(String args[]) {

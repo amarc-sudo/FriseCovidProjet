@@ -1,4 +1,4 @@
-package com.projettutore.covid.panel;
+package com.projettutore.covid.panelchronologie;
 
 import com.projettutore.covid.model.Date;
 import com.projettutore.covid.model.Event;
@@ -18,6 +18,7 @@ public class PanelEvenement extends JPanel {
         jLabel_Description = new JLabel();
         jLabel_Description.setText(event.toStringHtml());
         this.add(jLabel_Description);
+        setVisible(true);
     }
 
     public String getTitle(){

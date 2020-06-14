@@ -1,4 +1,4 @@
-package com.projettutore.covid.panel;
+package com.projettutore.covid.panelchronologie;
 
 import com.projettutore.covid.model.Chronologie;
 import com.projettutore.covid.model.Date;
@@ -41,6 +41,7 @@ public class PanelDiapo extends JPanel {
         Set set = dateEventTreeMap.entrySet();
         Iterator iterator = set.iterator();
         while(iterator.hasNext()){
+            System.out.println("cou");
             Map.Entry mapEntry = (Map.Entry)iterator.next();
             panelEvenements.add(new PanelEvenement((Event)mapEntry.getValue()));
         }
