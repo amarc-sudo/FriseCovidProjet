@@ -2,6 +2,7 @@ package com.projettutore.covid.frame;
 
 import javax.swing.*;
 
+import com.projettutore.covid.managers.PropertiesManager;
 import com.projettutore.covid.model.Chronologie;
 import com.projettutore.covid.panel.PanelCovid;
 import com.projettutore.covid.panel.PanelSelection;
@@ -25,18 +26,19 @@ public class FrameCovid extends JFrame {
 	 * @param parTitre
 	 */
     public  FrameCovid(String parTitre){
-    		super(parTitre);
-    		PanelSelection contentPane = new PanelSelection(this);
-    		//PanelCovid contentPane = new PanelCovid(new Chronologie("test"));
-    		setContentPane(contentPane);
-    		setSize(1000,600);
-    		setVisible(true);
-    		setDefaultCloseOperation(EXIT_ON_CLOSE);
-    		setLocation(200,200);
-    		jMenuBar = new JMenuBar();
-    		jMenuBar.setVisible(false);
-    		this.setJMenuBar(jMenuBar);
-    	}
+    	super(parTitre);
+		PropertiesManager.create();
+    	PanelSelection contentPane = new PanelSelection(this);
+    	//PanelCovid contentPane = new PanelCovid(new Chronologie("test"));
+    	setContentPane(contentPane);
+    	setSize(1000,600);
+    	setVisible(true);
+    	setDefaultCloseOperation(EXIT_ON_CLOSE);
+    	setLocation(200,200);
+    	jMenuBar = new JMenuBar();
+    	jMenuBar.setVisible(false);
+    	this.setJMenuBar(jMenuBar);
+    }
     		
 	public void setCovidPane(Chronologie chronologie, PanelCovid contentPane){
     	getContentPane().removeAll();
