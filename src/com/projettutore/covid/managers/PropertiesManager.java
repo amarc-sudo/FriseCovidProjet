@@ -11,6 +11,11 @@ public class PropertiesManager {
         messages = ResourceBundle.getBundle("lang", locale);
     }
 
+    /**
+     * @notNul
+     * @param element
+     * @return
+     */
     public static String getElement(String element){
         return messages.getString(element);
     }

@@ -19,7 +19,7 @@ public class FrameCovid extends JFrame {
 	/**
 	 * Item du Menu
 	 */
-	private JMenu[] items;
+	private JMenuItem[] items;
 
 	/**
 	 *
@@ -27,7 +27,6 @@ public class FrameCovid extends JFrame {
 	 */
     public  FrameCovid(String parTitre){
     	super(parTitre);
-		PropertiesManager.create();
     	PanelSelection contentPane = new PanelSelection(this);
     	//PanelCovid contentPane = new PanelCovid(new Chronologie("test"));
     	setContentPane(contentPane);
@@ -44,17 +43,25 @@ public class FrameCovid extends JFrame {
     	getContentPane().removeAll();
     	setContentPane(contentPane);
     	setVisible(true);
+    	createMenu(contentPane);
     	jMenuBar.setVisible(true);
 	}
 
-	public void createMenu(){
-    	items = new JMenu[3];
+	public void createMenu(PanelCovid contentPane){
+    	items = new JMenuItem[3];
+    	String name = "";
     	for(int i = 0 ; i < 3 ; i++){
-			items[i] = new JMenu("temporaire");
+			name = "menu" + (i+1);
+			items[i] = new JMenuItem(PropertiesManager.getElement(name));
+			items[i].setActionCommand(""+i+1);
+			items[i].addActionListener(contentPane);
+			items[i].setSize(200,200);
+			jMenuBar.add(items[i]);
 		}
 	}
 
     public static void main(String args[]) {
-    	new FrameCovid("Notre foutu projet nique sa mere");
+		PropertiesManager.create();
+    	new FrameCovid(PropertiesManager.getElement("titre"));
     }
 }

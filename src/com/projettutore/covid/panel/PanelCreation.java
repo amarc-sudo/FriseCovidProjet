@@ -7,6 +7,7 @@ import java.awt.Insets;
 import javax.swing.*;
 
 import com.projettutore.covid.controler.Controler_Selection;
+import com.projettutore.covid.managers.PropertiesManager;
 import com.projettutore.covid.model.Chronologie;
 import com.projettutore.covid.model.Date;
 
@@ -15,9 +16,9 @@ public class PanelCreation extends JPanel {
 	private JButton JB_Add = new JButton("+");
 	
 	//JLABELS
-	private JLabel JL_Name = new JLabel("Nom de la chronologie",JLabel.CENTER);
-	private JLabel JL_DateDebut = new JLabel("Date de debut",JLabel.CENTER);
-	private JLabel JL_DateFin = new JLabel("Date de fin",JLabel.CENTER);
+	private JLabel JL_Name = new JLabel(PropertiesManager.getElement("nameChronologie"),JLabel.CENTER);
+	private JLabel JL_DateDebut = new JLabel(PropertiesManager.getElement("dateBegin"),JLabel.CENTER);
+	private JLabel JL_DateFin = new JLabel(PropertiesManager.getElement("dateEnd"),JLabel.CENTER);
 	
 	//JTEXTEFIELD
 	private JTextField JTF_Name = new JTextField();
