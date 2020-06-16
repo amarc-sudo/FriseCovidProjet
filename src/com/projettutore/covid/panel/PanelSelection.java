@@ -27,7 +27,7 @@ public class PanelSelection extends JPanel {
         this.setLayout(new GridBagLayout());
         this.frameCovid = frameCovid;
         panelCreation = new PanelCreation();
-        panelFile = new PanelFile();
+        panelFile = new PanelFile(); 
         this.add(panelFile);
         this.add(panelCreation);
         controlerSelection = new Controler_Selection(this, panelCreation, panelFile, frameCovid);

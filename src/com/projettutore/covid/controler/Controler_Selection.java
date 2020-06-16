@@ -38,6 +38,7 @@ import com.projettutore.covid.panel.PanelSelection;
 			this.frameCovid = frameCovid;
 			panelCreation.recoredListener(this);
 			panelFile.recordListener(this);
+			panelCreation.recoredListener(this);
 
 		}
 		
@@ -61,6 +62,18 @@ import com.projettutore.covid.panel.PanelSelection;
 				PanelCovid panelCovid = new PanelCovid(chronologie);
 				FileManager.save(chronologie.getTitle(), chronologie);
 				frameCovid.setCovidPane(chronologie, panelCovid);
+			}
+			if(e.getActionCommand() == "JCB_Year_1") {
+				panelCreation.setJCB_MonthVisible(1);
+			}
+			if(e.getActionCommand() == "JCB_Year_2") {
+				panelCreation.setJCB_MonthVisible(2);
+			}
+			if(e.getActionCommand() == "JCB_Month_1") {
+				panelCreation.setJCB_DayVisible(panelCreation.getMonth(1),panelCreation.getYear(1),1);
+			}
+			if(e.getActionCommand() == "JCB_Month_2") {
+				panelCreation.setJCB_DayVisible(panelCreation.getMonth(2),panelCreation.getYear(2),2);
 			}
 		}
 			

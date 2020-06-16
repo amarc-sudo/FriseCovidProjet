@@ -86,6 +86,7 @@ public class PanelFormulaire extends JPanel {
 			//YEAR
 			String[] Year = {"2019","2020","2021"};
 			JCB_Year = new JComboBox(Year) ;
+			JCB_Year.setActionCommand("JCB_Year");
 			//END YEAR 
 			
 			//MONTH
@@ -103,10 +104,12 @@ public class PanelFormulaire extends JPanel {
 			Month = List.toArray(Month);
 			List.removeAll(List);
 			JCB_Month = new JComboBox(Month);
+			JCB_Month.setVisible(false);
+			JCB_Month.setActionCommand("JCB_Month");
 			//END MONTH
 			
 			//DAY
-			for(int i = 1;i < 31;i++) {
+			/*for(int i = 1;i < 31;i++) {
 				if(i<10) {
 					List.add( "0"+String.valueOf(i));
 		
@@ -119,10 +122,11 @@ public class PanelFormulaire extends JPanel {
 			String[] Day= new String[List.size()];
 			Day = List.toArray(Day);
 			List.removeAll(List);
-			JCB_Day = new JComboBox(Day);
+			JCB_Day = new JComboBox(Day);*/
+			JCB_Day.setVisible(false);
 			
 			//END DAY
-		
+			
 		
 			
 			
@@ -156,38 +160,12 @@ public class PanelFormulaire extends JPanel {
 			//FIN DE LA LIGNE 5
 			
 		}
-			
-			
-			
-			
-			
-			
-		
-		
-		
 
-		
-		
-		
-		
-		
-		
-		
-		
-		/*public void actionPerformed(ActionEvent parEvt) {
-			// TODO Auto-generated method stub
-			String HD = JCB_Heures.getSelectedItem()+":"+JCB_Minutes.getSelectedItem()+" ";
-			String HF = JCB_Heures2.getSelectedItem()+":"+JCB_Minutes2.getSelectedItem()+" ";
-			if(parEvt.getSource() == JB_Plus) {
-				Agenda.ajout(new Evt(HD, HF, chDate, JTF_Titre.getText(), JTF_Lieu.getText(),JTA_Description.getText()));
-				JTA_Resultat.setText("La Taille de l'agenda est: "+ Agenda.getSize()+"\n"+Agenda.toString());
-			}
-		}*/
-			
-		
 		public void recordListener (Controler_Covid parControler) { 
 			JB_Plus.addActionListener (parControler);
-			
+			JCB_Year.addActionListener(parControler);
+			JCB_Month.addActionListener(parControler);
+			JCB_Day.addActionListener(parControler);
 		}
 		
 		public Event getEvent() {
@@ -197,6 +175,38 @@ public class PanelFormulaire extends JPanel {
 		
 		public JButton getJB_Plus() {
 			return JB_Plus;
+		}
+		
+		public void setJCB_MonthVisible() {
+			JCB_Month.setVisible(true);
+		}
+		
+		public void setJCB_DayVisible(int parMonth,int parYear) {
+			Date temp = new Date (11,parMonth,parYear);
+			ArrayList<String> List = new ArrayList<String>();
+			for(int i=0;i< temp.dayInAMonth(parMonth, parYear) ;i++){
+				if(i<10) {
+					List.add( "0"+String.valueOf(i));
+		
+				}
+				else {
+					List.add(String.valueOf(i));
+		
+				}
+			
+			}
+			String[] Day= new String[List.size()];
+			Day = List.toArray(Day);
+			JCB_Day = new JComboBox(Day);
+			JCB_Day.setVisible(true);
+		}
+		
+		public int getYear() {
+			return Integer.parseInt((String) JCB_Year.getSelectedItem());
+		}
+		
+		public int getMonth() {
+			return Integer.parseInt((String) JCB_Month.getSelectedItem());
 		}
 
 	}

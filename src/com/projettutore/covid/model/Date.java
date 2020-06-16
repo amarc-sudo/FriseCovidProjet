@@ -50,7 +50,7 @@ public class Date implements Comparable<Date>, Serializable {
      * @param year
      * @return
      */
-    public static int dayInAMonth(int month, int year) {
+    public int dayInAMonth(int month, int year) {
         switch(month) {
             case 2:
                 if (isLeap(year)) {

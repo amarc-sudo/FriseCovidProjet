@@ -19,6 +19,7 @@ public class Controler_Covid implements ActionListener{
 	private PanelDiapo panelDiapo;
 	private PanelFile panelFile;
 	private PanelFrise panelFrise;
+	private PanelFormulaire panelFormulaire;
 	
 	
 	/**
@@ -30,9 +31,11 @@ public class Controler_Covid implements ActionListener{
 	public Controler_Covid (PanelDiapo parPanelDiapo , PanelFormulaire parPanelFormulaire, PanelFrise parPanelFrise) {
 		panelDiapo = parPanelDiapo ;
 		panelFrise = parPanelFrise;
+		panelFormulaire = parPanelFormulaire;
 		/*
 		panelDiapo.recordListener(this);
 		panelFrise.recordListener(this);*/
+		panelFormulaire.recordListener(this);
 
 	
 		
@@ -46,6 +49,13 @@ public class Controler_Covid implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand() == "JCB_Year") {
+			panelFormulaire.setJCB_MonthVisible();
+		}
+		
+		if(e.getActionCommand()== "JCB_Month") {
+			panelFormulaire.setJCB_DayVisible(panelFormulaire.getMonth(), panelFormulaire.getYear());
+		}
 		
 	}
 		
