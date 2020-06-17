@@ -43,8 +43,11 @@ public class Chronologie implements Serializable {
             return false;
         }
         else{
-            this.chronologieHashMap.put(event.getDateEvent(), event);
-            return true;
+            if(event.getDateEvent().compareTo(startDate) == 1 && event.getDateEvent().compareTo(endDate) == -1) {
+                this.chronologieHashMap.put(event.getDateEvent(), event);
+                return true;
+            }
+            else return false;
         }
     }
 

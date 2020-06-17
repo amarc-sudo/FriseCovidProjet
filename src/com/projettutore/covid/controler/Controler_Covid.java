@@ -37,10 +37,6 @@ public class Controler_Covid implements ActionListener{
 	
 		
 	}
-	
-	
-	
-	
 	/**
 	 *Ici se fera la gestion de tout les boutons et des action litener des panels initialiser precedemment
 	 */
