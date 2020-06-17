@@ -7,6 +7,8 @@ import com.projettutore.covid.model.Chronologie;
 import com.projettutore.covid.panel.PanelCovid;
 import com.projettutore.covid.panel.PanelSelection;
 
+import java.awt.*;
+
 
 /**
  * Classe Principal de l'application, Derive de JFrame elle est la frame principal de l'application.
@@ -34,16 +36,16 @@ public class FrameCovid extends JFrame {
     	setVisible(true);
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
     	setLocation(200,200);
-    	jMenuBar = new JMenuBar();
-    	jMenuBar.setVisible(false);
-    	this.setJMenuBar(jMenuBar);
     }
     		
 	public void setCovidPane(Chronologie chronologie, PanelCovid contentPane){
+		jMenuBar = new JMenuBar();
     	getContentPane().removeAll();
     	setContentPane(contentPane);
+		createMenu(contentPane);
+		jMenuBar.setMaximumSize(jMenuBar.getPreferredSize());
+		this.setJMenuBar(jMenuBar);
     	setVisible(true);
-    	createMenu(contentPane);
     	jMenuBar.setVisible(true);
 	}
 
@@ -53,9 +55,9 @@ public class FrameCovid extends JFrame {
     	for(int i = 0 ; i < 3 ; i++){
 			name = "menu" + (i+1);
 			items[i] = new JMenuItem(PropertiesManager.getElement(name));
-			items[i].setActionCommand(""+i+1);
+			items[i].setActionCommand(""+(i+1));
 			items[i].addActionListener(contentPane);
-			items[i].setSize(200,200);
+			items[i].setMaximumSize(new Dimension(items[i].getPreferredSize().width , items[i].getMaximumSize().height));
 			jMenuBar.add(items[i]);
 		}
 	}

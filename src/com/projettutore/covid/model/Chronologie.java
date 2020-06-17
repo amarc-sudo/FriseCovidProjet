@@ -9,13 +9,13 @@ import java.util.TreeMap;
  * @see Event
  */
 public class Chronologie implements Serializable {
-	private Date StartDate;
-	private Date EndDate;
+	private Date startDate;
+	private Date endDate;
     private HashMap<Date, Event> chronologieHashMap;
     private String titleChronologie;
 
     /**
-     *  Constructeur d'une chronologie
+     *  Constructeur d'une chronologie avec une durée d'un ans a partir de la date system
      * @param titleChronologie
      */
     public Chronologie(String titleChronologie){
@@ -23,6 +23,16 @@ public class Chronologie implements Serializable {
         this.titleChronologie = titleChronologie;
     }
 
+    /**
+     * Constructeur d'une chronologie avec changement de la date
+     * @param titleChronologie
+     */
+    public Chronologie(String titleChronologie, Date startDate, Date endDate){
+        this.chronologieHashMap = new HashMap<Date, Event>();
+        this.titleChronologie = titleChronologie;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
     /**
      *
      * @param event
@@ -44,5 +54,17 @@ public class Chronologie implements Serializable {
     }
     public String getTitle(){
         return titleChronologie;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public HashMap<Date, Event> getChronologieHashMap() {
+        return chronologieHashMap;
     }
 }

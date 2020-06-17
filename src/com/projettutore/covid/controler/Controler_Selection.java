@@ -7,6 +7,7 @@ import java.io.File;
 import com.projettutore.covid.frame.FrameCovid;
 import com.projettutore.covid.managers.FileManager;
 import com.projettutore.covid.model.Chronologie;
+import com.projettutore.covid.model.Date;
 import com.projettutore.covid.panel.PanelCovid;
 import com.projettutore.covid.panel.PanelCreation;
 import com.projettutore.covid.panel.PanelFile;
@@ -58,12 +59,28 @@ import com.projettutore.covid.panel.PanelSelection;
 			}
 			if(e.getActionCommand() == "add"){
 				Chronologie chronologie = panelCreation.getNewChronologie();
-				PanelCovid panelCovid = new PanelCovid(chronologie);
-				FileManager.save(chronologie.getTitle(), chronologie);
-				frameCovid.setCovidPane(chronologie, panelCovid);
+				if(chronologie.getStartDate().compareTo(chronologie.getEndDate()) == -1) {
+					PanelCovid panelCovid = new PanelCovid(chronologie);
+					FileManager.save(chronologie.getTitle(), chronologie);
+					frameCovid.setCovidPane(chronologie, panelCovid);
+				}
+			}
+			if(e.getActionCommand() == "year1"){
+				panelCreation.changeDay(panelCreation.getMonth1(), panelCreation.getYear1(), true);
+			}
+			if(e.getActionCommand() == "year2"){
+				panelCreation.changeDay(panelCreation.getMonth2(), panelCreation.getYear2(), false);
+			}
+			if(e.getActionCommand() == "month1"){
+				panelCreation.changeDay(panelCreation.getMonth1(), panelCreation.getYear1(), true);
+			}
+			if(e.getActionCommand() == "month2"){
+				panelCreation.changeDay(panelCreation.getMonth2(), panelCreation.getYear2(), false);
 			}
 		}
-			
-		}
+
+
+
+	}
 
 

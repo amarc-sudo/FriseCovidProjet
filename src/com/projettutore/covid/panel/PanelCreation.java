@@ -62,16 +62,21 @@ public class PanelCreation extends JPanel {
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		add(JL_DateDebut,gbc);
-		
+
+		createYearMonthDay();
+
 		gbc.gridx = 1;
 		add(JCB_Year_1,gbc);
 		JCB_Year_1.setName("year1");
+		JCB_Year_1.setActionCommand("year1");
 		gbc.gridx = 2;
 		add(JCB_Month_1,gbc);
 		JCB_Month_1.setName("month1");
+		JCB_Month_1.setActionCommand("month1");
 		gbc.gridx = 3;
 		add(JCB_Day_1,gbc);
 		JCB_Day_1.setName("day1");
+		JCB_Day_1.setActionCommand("day1");
 		//lINE 3
 		gbc.gridx = 0;
 		gbc.gridy = 3;
@@ -80,12 +85,15 @@ public class PanelCreation extends JPanel {
 		gbc.gridx = 1;
 		add(JCB_Year_2,gbc);
 		JCB_Year_2.setName("year2");
+		JCB_Year_2.setActionCommand("year2");
 		gbc.gridx = 2;
 		add(JCB_Month_2,gbc);
 		JCB_Month_2.setName("month2");
+		JCB_Month_2.setActionCommand("month2");
 		gbc.gridx = 3;
 		add(JCB_Day_2,gbc);
 		JCB_Day_2.setName(("day2"));
+		JCB_Day_2.setName("day2");
 		
 		
 	}
@@ -102,10 +110,62 @@ public class PanelCreation extends JPanel {
 	}
 
 	public Chronologie getNewChronologie(){
-		/*
+
 		Date debut = new Date((int)JCB_Year_1.getSelectedItem(), (int)JCB_Month_1.getSelectedItem(), (int)JCB_Day_1.getSelectedItem());
-		Date fin = new Date((int)JCB_Year_2.getSelectedItem(), (int)JCB_Month_2.getSelectedItem(), (int)JCB_Day_2.getSelectedItem());*/
-		return new Chronologie(JTF_Name.getText());
+		Date fin = new Date((int)JCB_Year_2.getSelectedItem(), (int)JCB_Month_2.getSelectedItem(), (int)JCB_Day_2.getSelectedItem());
+		return new Chronologie(JTF_Name.getText(), debut, fin);
+	}
+
+	public void createYearMonthDay() {
+		for(int i = 1900 ; i <= 2050 ; i++){
+			JCB_Year_1.addItem(i);
+			JCB_Year_2.addItem(i);
+		}
+		JCB_Year_1.setSelectedIndex(100);
+		JCB_Year_2.setSelectedIndex(110);
+		for(int i = 1 ; i < 13 ; i++){
+			JCB_Month_1.addItem(i);
+			JCB_Month_2.addItem(i);
+		}
+		for(int i = 1 ; i < 32 ; i++){
+			JCB_Day_1.addItem(i);
+			JCB_Day_2.addItem(i);
+		}
+	}
+	public void changeDay(int month, int year, boolean jComboBox){
+		if(jComboBox){
+			System.out.println(month);
+			JCB_Day_1.removeAllItems();
+			for(int i = 1 ; i <= Date.dayInAMonth(month, year); i++){
+				System.out.println(i);
+				JCB_Day_1.addItem(i);
+			}
+		}
+		else{
+			JCB_Day_2 = new JComboBox<>();
+			for(int i = 1 ; i <= Date.dayInAMonth(month, year); i++){
+				JCB_Day_2.addItem(i);
+			}
+		}
+	}
+
+	public int getDay1(){
+		return (int)JCB_Day_1.getSelectedItem();
+	}
+	public int getDay2(){
+		return (int)JCB_Day_2.getSelectedItem();
+	}
+	public int getMonth1(){
+		return (int)JCB_Month_1.getSelectedItem();
+	}
+	public int getMonth2(){
+		return (int)JCB_Month_2.getSelectedItem();
+	}
+	public int getYear1(){
+		return (int)JCB_Year_1.getSelectedItem();
+	}
+	public int getYear2(){
+		return (int)JCB_Year_2.getSelectedItem();
 	}
 
 }

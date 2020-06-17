@@ -65,6 +65,7 @@ public class PanelCovid extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String eventName = actionEvent.getActionCommand();
+        System.out.println(eventName);
         CardLayout cardLayout = (CardLayout) this.getLayout();
         switch (eventName) {
 
