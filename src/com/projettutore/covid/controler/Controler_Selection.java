@@ -2,16 +2,15 @@ package com.projettutore.covid.controler;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import com.projettutore.covid.frame.FrameCovid;
 import com.projettutore.covid.managers.FileManager;
 import com.projettutore.covid.model.Chronologie;
-import com.projettutore.covid.model.Date;
-import com.projettutore.covid.panel.PanelCovid;
-import com.projettutore.covid.panel.PanelCreation;
-import com.projettutore.covid.panel.PanelFile;
-import com.projettutore.covid.panel.PanelSelection;
+import com.projettutore.covid.panel.covid.PanelCovid;
+import com.projettutore.covid.panel.selection.PanelCreation;
+import com.projettutore.covid.panel.selection.PanelFile;
+import com.projettutore.covid.panel.selection.PanelFormulaire;
+import com.projettutore.covid.panel.selection.PanelSelection;
 
 /**
 	 * @author Slimanitz
@@ -24,8 +23,9 @@ import com.projettutore.covid.panel.PanelSelection;
 		private PanelSelection panelSelection;
 		private PanelCreation panelCreation;
 		private PanelFile panelFile;
+		private PanelFormulaire panelFormulaire;
 		private FrameCovid frameCovid;
-		
+		private Chronologie chronologie;
 		/**
 		 * @param parPanelCreation
 		 * @param parPanelFile
@@ -39,7 +39,10 @@ import com.projettutore.covid.panel.PanelSelection;
 			this.frameCovid = frameCovid;
 			panelCreation.recoredListener(this);
 			panelFile.recordListener(this);
-
+		}
+		public Controler_Selection(PanelFormulaire panelFormulaire){
+			this.panelFormulaire = panelFormulaire;
+			panelFormulaire.recordListener(this);
 		}
 		
 		
@@ -52,18 +55,28 @@ import com.projettutore.covid.panel.PanelSelection;
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand() == "load") {
 				if(panelFile.getSelectedSave() != null){
-					Chronologie chronologie = FileManager.load(panelFile.getSelectedSave());
-					PanelCovid panelCovid = new PanelCovid(chronologie);
+					chronologie = FileManager.load(panelFile.getSelectedSave());
+					PanelCovid panelCovid = new PanelCovid(chronologie, frameCovid);
 					frameCovid.setCovidPane(chronologie, panelCovid);
 				}
 			}
 			if(e.getActionCommand() == "add"){
-				Chronologie chronologie = panelCreation.getNewChronologie();
-				if(chronologie.getStartDate().compareTo(chronologie.getEndDate()) == -1) {
-					PanelCovid panelCovid = new PanelCovid(chronologie);
-					FileManager.save(chronologie.getTitle(), chronologie);
-					frameCovid.setCovidPane(chronologie, panelCovid);
-				}
+				chronologie = panelCreation.getNewChronologie();
+				panelSelection.removeAll();
+				frameCovid.getContentPane().removeAll();
+				panelFormulaire = new PanelFormulaire(chronologie);
+				panelFormulaire.recordListener(this);
+				panelSelection.add(panelFormulaire);
+				panelFormulaire.setVisible(true);
+				frameCovid.setContentPane(panelSelection);
+			}
+			if(e.getActionCommand() == "addEvent"){
+				chronologie.add(panelFormulaire.getEvent());
+			}
+			if(e.getActionCommand() == "endEvent"){
+				PanelCovid panelCovid = new PanelCovid(chronologie, frameCovid);
+				FileManager.save(chronologie.getTitle(), chronologie);
+				frameCovid.setCovidPane(chronologie, panelCovid);
 			}
 			if(e.getActionCommand() == "year1"){
 				panelCreation.changeDay(panelCreation.getMonth1(), panelCreation.getYear1(), true);
@@ -76,6 +89,12 @@ import com.projettutore.covid.panel.PanelSelection;
 			}
 			if(e.getActionCommand() == "month2"){
 				panelCreation.changeDay(panelCreation.getMonth2(), panelCreation.getYear2(), false);
+			}
+			if(e.getActionCommand() == "year"){
+				panelFormulaire.changeDay(panelFormulaire.getMonth(), panelFormulaire.getYear());
+			}
+			if(e.getActionCommand() == "month"){
+				panelFormulaire.changeDay(panelFormulaire.getMonth(), panelFormulaire.getYear());
 			}
 		}
 

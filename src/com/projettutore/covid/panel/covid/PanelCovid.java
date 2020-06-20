@@ -1,8 +1,10 @@
-package com.projettutore.covid.panel;
+package com.projettutore.covid.panel.covid;
 
-import com.projettutore.covid.managers.PropertiesManager;
+import com.projettutore.covid.frame.FrameCovid;
 import com.projettutore.covid.model.Chronologie;
-import com.projettutore.covid.panelchronologie.PanelAffichage;
+import com.projettutore.covid.panel.selection.PanelCreation;
+import com.projettutore.covid.panel.selection.PanelFormulaire;
+import com.projettutore.covid.panel.selection.PanelSelection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,15 +30,16 @@ public class PanelCovid extends JPanel implements ActionListener {
     /**
      * Constructeur de base de la classe
      */
-    public PanelCovid (Chronologie chronologie){
+    public PanelCovid (Chronologie chronologie, FrameCovid frameCovid){
         this.chronologie = chronologie;
         cardLayout = new CardLayout();
         setLayout(cardLayout);
         this.setVisible(true);
         PanelAffichage panelAffichage = new PanelAffichage(chronologie);
-        PanelFormulaire panelFormulaire = new PanelFormulaire();
-        this.add(panelAffichage, "menu1");
-        this.add(panelFormulaire, "menu2");
+        //PanelFormulaire panelFormulaire = new PanelFormulaire();
+        PanelSelection panelSelection = new PanelSelection(frameCovid);
+        this.add(panelAffichage, "menu2");
+        this.add(panelSelection, "menu1");
         //Controler_Covid controler = new Controler_Covid(panelDiapo, panelFormulaire,panelFrise);
         //this.setBackground(Color.WHITE);
     }
@@ -65,7 +68,6 @@ public class PanelCovid extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String eventName = actionEvent.getActionCommand();
-        System.out.println(eventName);
         CardLayout cardLayout = (CardLayout) this.getLayout();
         switch (eventName) {
 

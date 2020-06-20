@@ -43,6 +43,9 @@ public class Chronologie implements Serializable {
             return false;
         }
         else{
+            System.out.println(event.getDateEvent());
+            System.out.println(endDate);
+            System.out.println(event.getDateEvent().compareTo(endDate));
             if(event.getDateEvent().compareTo(startDate) == 1 && event.getDateEvent().compareTo(endDate) == -1) {
                 this.chronologieHashMap.put(event.getDateEvent(), event);
                 return true;

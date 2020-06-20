@@ -1,4 +1,4 @@
-package com.projettutore.covid.panelchronologie;
+package com.projettutore.covid.panel.covid;
 
 import com.projettutore.covid.model.Chronologie;
 import com.projettutore.covid.model.Date;
@@ -18,7 +18,7 @@ public class PanelAffichage extends JPanel {
     public PanelAffichage(Chronologie chronologie){
         this.chronologie = chronologie;
         this.setLayout(new BorderLayout());
-        chronologie.add(new Event(new Date(22,12,12), "coucou", "coucou", "coucou"));
+        chronologie.add(new Event(new Date(22,12,2005), "coucou", "coucou", "coucou"));
         panelDiapo = new PanelDiapo(chronologie);
         panelFrise = new PanelFrise();
         this.add(panelDiapo, BorderLayout.NORTH);

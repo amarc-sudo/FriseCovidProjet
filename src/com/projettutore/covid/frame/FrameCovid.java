@@ -4,8 +4,8 @@ import javax.swing.*;
 
 import com.projettutore.covid.managers.PropertiesManager;
 import com.projettutore.covid.model.Chronologie;
-import com.projettutore.covid.panel.PanelCovid;
-import com.projettutore.covid.panel.PanelSelection;
+import com.projettutore.covid.panel.covid.PanelCovid;
+import com.projettutore.covid.panel.selection.PanelSelection;
 
 import java.awt.*;
 

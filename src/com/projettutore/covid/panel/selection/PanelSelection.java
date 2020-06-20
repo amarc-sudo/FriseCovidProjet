@@ -1,4 +1,4 @@
-package com.projettutore.covid.panel;
+package com.projettutore.covid.panel.selection;
 
 import com.projettutore.covid.controler.Controler_Selection;
 import com.projettutore.covid.frame.FrameCovid;

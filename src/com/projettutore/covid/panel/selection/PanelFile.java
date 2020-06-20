@@ -1,4 +1,4 @@
-package com.projettutore.covid.panel;
+package com.projettutore.covid.panel.selection;
 
 import com.projettutore.covid.controler.Controler_Selection;
 import com.projettutore.covid.managers.FileManager;
@@ -40,7 +40,6 @@ public class PanelFile extends JPanel {
         for(int i = 0; i < listSave.size() ; i++){
             listModelChronologie.addElement(listSave.get(i));
         }
-
         JList_Chronologie = new JList<String>(listModelChronologie);
         JList_Chronologie.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane listScrollPane = new JScrollPane(JList_Chronologie);

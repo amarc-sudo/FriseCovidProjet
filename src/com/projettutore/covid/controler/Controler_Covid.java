@@ -3,9 +3,11 @@ package com.projettutore.covid.controler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.projettutore.covid.panel.*;
-import com.projettutore.covid.panelchronologie.PanelDiapo;
-import com.projettutore.covid.panelchronologie.PanelFrise;
+import com.projettutore.covid.panel.covid.PanelCovid;
+import com.projettutore.covid.panel.covid.PanelDiapo;
+import com.projettutore.covid.panel.selection.PanelFormulaire;
+import com.projettutore.covid.panel.covid.PanelFrise;
+import com.projettutore.covid.panel.selection.PanelFile;
 
 
 /**
