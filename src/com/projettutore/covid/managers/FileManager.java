@@ -33,10 +33,10 @@ public class FileManager {
      * @param source
      * @return
      */
-    public static boolean copier(File source) {
-        if(!(new File(f.toString() +"\\ProjetCovid\\" + source.getName()).exists())) {
+    public static boolean copier(File source, String name) {
+        if(!(new File(f.toString() +"\\ProjetCovid\\" + File.separator + name + source.getName()).exists())) {
             try (InputStream sourceFile = new java.io.FileInputStream(source);
-                 OutputStream destinationFile = new FileOutputStream(new File(f.toString() + "\\ProjetCovid\\" + source.getName()))) {
+                 OutputStream destinationFile = new FileOutputStream(new File(f.toString() + "\\ProjetCovid\\"  + name + File.separator + source.getName()))) {
                 // Lecture par segment de 0.5Mo
                 byte buffer[] = new byte[512 * 1024];
                 int nbLecture;
@@ -58,9 +58,9 @@ public class FileManager {
      * @return
      * @throws IOException
      */
-    public static BufferedImage loadImage(String name) throws IOException {
-        System.out.println(new File(f.toString() + File.separator +"ProjetCovid"+ File.separator + name).exists());
-        return ImageIO.read(new File(f.toString() + File.separator +"ProjetCovid"+ File.separator + name));
+    public static BufferedImage loadImage(String name, String filesName) throws IOException {
+        System.out.println(new File(f.toString() + File.separator +"ProjetCovid"+ File.separator + filesName+ File.separator + name).exists());
+        return ImageIO.read(new File(f.toString() + File.separator +"ProjetCovid"+ File.separator + filesName+ File.separator + name));
     }
 
     /**
@@ -73,9 +73,9 @@ public class FileManager {
             try {
                 FileInputStream fis;
                 if(name.endsWith(".serial"))
-                    fis = new FileInputStream(new File(f.toString() +"\\ProjetCovid\\" + name));
+                    fis = new FileInputStream(new File(f.toString() +"\\ProjetCovid\\" + name.substring(0, name.length() - 7) + File.separator  + name));
                 else
-                    fis = new FileInputStream(new File(f.toString() +"\\ProjetCovid\\" + name+".serial"));
+                    fis = new FileInputStream(new File(f.toString() +"\\ProjetCovid\\" + name + File.separator + name+".serial"));
 
                 ObjectInputStream ois= new ObjectInputStream(fis);
                 try {
@@ -100,10 +100,10 @@ public class FileManager {
             try {
                 FileInputStream fis;
                 if(name.endsWith(".serial")) {
-                    fis = new FileInputStream(new File(f.toString() + "/ProjetCovid/" + name));
+                    fis = new FileInputStream(new File(f.toString() + "/ProjetCovid/"+ name.substring(0, name.length() - 7) + File.separator + name));
                 }
                 else
-                    fis = new FileInputStream(new File(f.toString() + "/ProjetCovid/" + name + ".serial"));
+                    fis = new FileInputStream(new File(f.toString() + "/ProjetCovid/" + name + File.separator + name + ".serial"));
                 ObjectInputStream ois= new ObjectInputStream(fis);
                 try {
 
@@ -133,13 +133,13 @@ public class FileManager {
      */
     public static void save(String name, Chronologie chronologie) {
         if (isWindows()) {
-            if(new File(f.toString() + "\\ProjetCovid\\").exists()) {
+            if(new File(f.toString() + "\\ProjetCovid\\" + name + File.separator).exists()) {
                 try {
                     FileOutputStream fos;
                     if (name.endsWith(".serial"))
-                        fos = new FileOutputStream(new File(f.toString() + "\\ProjetCovid\\" + name));
+                        fos = new FileOutputStream(new File(f.toString() + "\\ProjetCovid\\" + name + File.separator + name));
                     else
-                        fos = new FileOutputStream(new File(f.toString() + "\\ProjetCovid\\" + name + ".serial"));
+                        fos = new FileOutputStream(new File(f.toString() + "\\ProjetCovid\\" + name + File.separator + name + ".serial"));
                     ObjectOutputStream oos = new ObjectOutputStream(fos);
                     try {
                         oos.writeObject(chronologie);
@@ -159,14 +159,14 @@ public class FileManager {
                 save(name, chronologie);
             }
         }
-        if(new File(f.toString() + "/ProjetCovid/").exists()) {
+        if(new File(f.toString() + "/ProjetCovid/" + name + File.separator).exists()) {
             if (isUnix()) {
                 try {
                     FileOutputStream fos;
                     if (name.endsWith(".serial"))
-                        fos = new FileOutputStream(new File(f.toString() + "/ProjetCovid/" + name));
+                        fos = new FileOutputStream(new File(f.toString() + "/ProjetCovid/" + name + File.separator + name));
                     else
-                        fos = new FileOutputStream(new File(f.toString() + "/ProjetCovid/" + name + ".serial"));
+                        fos = new FileOutputStream(new File(f.toString() + "/ProjetCovid/" + name + File.separator + name + ".serial"));
                     ObjectOutputStream oos = new ObjectOutputStream(fos);
                     try {
                         oos.writeObject(chronologie);
@@ -213,33 +213,74 @@ public class FileManager {
         }
     }
 
+    public static void createFileChronologie(String name){
+        File file;
+        if(isWindows()) {
+            file = new File(f.toString() + "\\ProjetCovid\\" + name );
+            if (file.exists()) {
+            } else {
+                if (file.mkdir()) {
+                } else {
+                }
+            }
+        }
+        if(isUnix()) {
+            file = new File(f.toString()+"/ProjetCovid/" + name);
+            if (file.exists()) {
+            } else {
+                if (file.mkdirs()) {
+                } else {
+                }
+            }
+        }
+    }
+
 
     /**
      * Methode qui renvoi une arrayList des noms des chronologie existante
      * @return
      */
-    public static ArrayList<String> chronologieListe(){
+    public static ArrayList chronologieListe() {
         File repertoire;
         ArrayList<String> returnStatement = new ArrayList<String>();
+
         if(isWindows())
             repertoire = new File(f.toString() + "\\ProjetCovid\\");
         else
             repertoire = new File(f.toString() + "/ProjetCovid/");
-        File[] files=repertoire.listFiles();
-        if(files != null){
-            for (File file : files) {
-                if (file.toString().endsWith(".serial")) {
-                    returnStatement.add(((String)file.getName()));
-                }
-            }
+        if (repertoire.isDirectory()) {
+            search(repertoire, returnStatement);
+        }
+        else {
         }
         return returnStatement;
     }
+
+    private static void search(File file, ArrayList<String> result) {
+        if (file.isDirectory()) {
+            if (file.canRead()) {
+                for (File temp : file.listFiles()) {
+                    if (temp.isDirectory()) {
+                        search(temp, result);
+                    } else {
+                        if (temp.getName().endsWith(".serial")) {
+                            result.add(temp.getAbsoluteFile().getName().toString());
+                        }
+
+                    }
+                }
+            } else {
+            }
+        }
+
+    }
+
+
     /**
-     * Methode qui renvoie un boolean true si l'os est Windows
-     *
-     * @return boolean
-     */
+    * Methode qui renvoie un boolean true si l'os est Windows
+    *
+    * @return boolean
+    */
     public static boolean isWindows() {
         return (OS.indexOf("win") >= 0);
     }

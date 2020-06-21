@@ -13,7 +13,6 @@ import java.awt.*;
 
 /**
  * Panel qui permet d'afficher la Frise chronologie et l'evenement selectione
- *
  */
 public class PanelAffichage extends JPanel {
     private PanelDiapo panelDiapo;
@@ -24,7 +23,7 @@ public class PanelAffichage extends JPanel {
         this.chronologie = chronologie;
         this.setLayout(new GridLayout(2,1));
         panelDiapo = new PanelDiapo(chronologie);
-        panelFrise = new PanelFrise();
+        panelFrise = new PanelFrise(chronologie);
         this.add(panelDiapo, BorderLayout.NORTH);
         this.add(panelFrise, BorderLayout.SOUTH);
         try {

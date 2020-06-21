@@ -14,29 +14,23 @@ public class Event implements Comparable<Event>, Serializable {
     private String title;
     private String description;
     private String pathToImg;
+    private int poids;
 
-    public Event(Date dateEvent, String title, String description, String pathToImg) {
+    public Event(Date dateEvent, String title, String description, String pathToImg, int poids) {
         this.dateEvent = dateEvent;
         this.title = title;
         this.description = description;
         this.pathToImg = pathToImg;
+        this.poids = poids;
     }
 
     @Override
     public int compareTo(Event event) {
-        if(dateEvent.compareTo(event.getDateEvent()) == 1)
-            return 1;
-        else if (dateEvent.compareTo(event.getDateEvent()) == -1){
-            return -1;
-        }
-        else{
-            return 0;
-        }
+        return dateEvent.compareTo(event.getDateEvent());
     }
 
     @Override
     public boolean equals(Object o) {
-        System.out.println("coucou");
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
@@ -45,7 +39,6 @@ public class Event implements Comparable<Event>, Serializable {
 
     @Override
     public int hashCode() {
-        System.out.println("coucou");
         return Objects.hash(dateEvent);
     }
 

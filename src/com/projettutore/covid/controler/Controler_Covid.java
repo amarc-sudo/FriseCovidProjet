@@ -2,6 +2,7 @@ package com.projettutore.covid.controler;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import com.projettutore.covid.exeption.ChronologieException;
 import com.projettutore.covid.exeption.FormulaireExeption;
@@ -14,7 +15,10 @@ import com.projettutore.covid.panel.selection.PanelFormulaire;
 import com.projettutore.covid.panel.covid.PanelFrise;
 import com.projettutore.covid.panel.selection.PanelFile;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 
 
 /**
@@ -52,18 +56,31 @@ public class Controler_Covid implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand() == "leftButton"){
-			panelDiapo.getPanelNavigationEvenement().next();
-		}
-		if(e.getActionCommand() == "rightButton"){
 			panelDiapo.getPanelNavigationEvenement().previous();
 		}
-		try {
-		if (e.getActionCommand() == "addEvent") {
-			chronologie.add(panelFormulaire.getEvent());
+		if(e.getActionCommand() == "rightButton"){
+			panelDiapo.getPanelNavigationEvenement().next();
 		}
-	}catch (ChronologieException | FormulaireExeption fE){
-		JOptionPane.showMessageDialog(null, fE);
-	}
+		try {
+			if (e.getActionCommand() == "addEvent") {
+			chronologie.add(panelFormulaire.getEvent());
+			}
+		}catch (ChronologieException | FormulaireExeption fE){
+			JOptionPane.showMessageDialog(null, fE);
+		}
+		if(e.getActionCommand() == "import"){
+			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+			jfc.addChoosableFileFilter(new FileNameExtensionFilter(".png", "png", ".jpg", "jpg"));
+			jfc.addChoosableFileFilter(new FileNameExtensionFilter(".jpg", "jpg"));
+			jfc.setAcceptAllFileFilterUsed(false);
+			jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			int returnValue = jfc.showOpenDialog(null);
+
+			if(returnValue == JFileChooser.APPROVE_OPTION){
+				File selected = jfc.getSelectedFile();
+				panelFormulaire.getJTF_Location().setText(selected.getAbsolutePath());
+			}
+		}
 
 	}
 		

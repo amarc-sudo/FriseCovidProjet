@@ -8,6 +8,7 @@ import com.projettutore.covid.model.Event;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -26,45 +27,51 @@ public class PanelNavigationEvenement extends JPanel {
     private CardLayout cardLayout;
     private  ArrayList<PanelEvenement> panelEvenements;
 
+
+    /**
+     * Panel de navigation, posède un cardLayout remplie de panelEvenement trier dans l'ordre Chronologique
+     * @param chronologie
+     * @see PanelEvenement
+     */
     public PanelNavigationEvenement(Chronologie chronologie){
         this.chronologie = chronologie;
         cardLayout = new CardLayout();
         panelEvenements = new ArrayList<>();
         this.setLayout(cardLayout);
-        TreeMap<Date, Event> dateEventTreeMap = chronologie.getTreeEvent();
-        Set set = dateEventTreeMap.entrySet();
+        HashMap<Date, Event> dateEventHashMap = chronologie.getSortHashMap();
+        Set set = dateEventHashMap.entrySet();
         Iterator iterator = set.iterator();
         while(iterator.hasNext()){
             Map.Entry mapEntry = (Map.Entry)iterator.next();
-            PanelEvenement panelEvenement = new PanelEvenement((Event)mapEntry.getValue());
+            PanelEvenement panelEvenement = new PanelEvenement((Event)mapEntry.getValue(), chronologie.getTitle());
             panelEvenements.add(panelEvenement);
-        }
-        for(int i = 0 ; i < panelEvenements.size() ; i++){
-            this.add(panelEvenements.get(i));
+            this.add(panelEvenement, ((Event)mapEntry.getValue()).getDateEvent().toString());
         }
     }
+
     public void refresh(){
         for(int i = 0 ; i < panelEvenements.size() ; i++)
             this.remove(panelEvenements.get(i));
-        TreeMap<Date, Event> dateEventTreeMap = chronologie.getTreeEvent();
-        Set set = dateEventTreeMap.entrySet();
+        HashMap<Date, Event> dateEventHashMap = chronologie.getSortHashMap();
+        Set set = dateEventHashMap.entrySet();
         Iterator iterator = set.iterator();
         while(iterator.hasNext()){
             Map.Entry mapEntry = (Map.Entry)iterator.next();
-            PanelEvenement panelEvenement = new PanelEvenement((Event)mapEntry.getValue());
+            System.out.println(((Event)mapEntry.getValue()).getDateEvent().toString());
+            PanelEvenement panelEvenement = new PanelEvenement((Event)mapEntry.getValue(), chronologie.getTitle());
             panelEvenements.add(panelEvenement);
-        }
-        for(int i = 0 ; i < panelEvenements.size() ; i++){
-            this.add(panelEvenements.get(i));
+            this.add(panelEvenement);
         }
     }
     public void next(){
-        refresh();
-        cardLayout.next(this);
+       cardLayout.next(this);
     }
     public void previous(){
-        refresh();
         cardLayout.previous(this);
+    }
+
+    public void show(String cardString){
+        cardLayout.show(this, cardString);
     }
 
 }

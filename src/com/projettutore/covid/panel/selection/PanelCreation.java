@@ -20,6 +20,7 @@ public class PanelCreation extends JPanel {
 	private JLabel JL_Name = new JLabel(PropertiesManager.getElement("nameChronologie"),JLabel.CENTER);
 	private JLabel JL_DateDebut = new JLabel(PropertiesManager.getElement("dateBegin"),JLabel.CENTER);
 	private JLabel JL_DateFin = new JLabel(PropertiesManager.getElement("dateEnd"),JLabel.CENTER);
+	private JLabel JL_Periode = new JLabel(PropertiesManager.getElement("periode"), JLabel.CENTER);
 	
 	//JTEXTEFIELD
 	private JTextField JTF_Name = new JTextField();
@@ -33,7 +34,9 @@ public class PanelCreation extends JPanel {
 	private JComboBox<Integer> JCB_Year_2 = new JComboBox();
 	private JComboBox<Integer> JCB_Month_2 = new JComboBox();
 	private JComboBox<Integer> JCB_Day_2 = new JComboBox();
-	
+
+	private JComboBox<String> JCB_periode;
+
 	private GridBagConstraints gbc = new GridBagConstraints();
 	
 	
@@ -95,6 +98,18 @@ public class PanelCreation extends JPanel {
 		add(JCB_Day_2,gbc);
 		JCB_Day_2.setName(("day2"));
 		JCB_Day_2.setName("day2");
+		//end line 3
+		//line 4
+		gbc.gridy = 4;
+		gbc.gridx = 0;
+		this.add(JL_Periode, gbc);
+		gbc.gridx = 1;
+		gbc.gridwidth = 3;
+		String[] periode = {PropertiesManager.getElement("day"), PropertiesManager.getElement("month"), PropertiesManager.getElement("year")};
+		JCB_periode = new JComboBox<String>(periode);
+		JCB_periode.setActionCommand("periode");
+		this.add(JCB_periode, gbc);
+		//endline4
 		
 		
 	}
@@ -122,7 +137,7 @@ public class PanelCreation extends JPanel {
 	public Chronologie getNewChronologie(){
 		Date debut = new Date((int)JCB_Day_1.getSelectedItem(), (int)JCB_Month_1.getSelectedItem(), (int)JCB_Year_1.getSelectedItem());
 		Date fin = new Date((int)JCB_Day_2.getSelectedItem(), (int)JCB_Month_2.getSelectedItem(),(int)JCB_Year_2.getSelectedItem());
-		return new Chronologie(JTF_Name.getText(), debut, fin);
+		return new Chronologie(JTF_Name.getText(), debut, fin, (String) JCB_periode.getSelectedItem());
 	}
 
 	public void createYearMonthDay() {
