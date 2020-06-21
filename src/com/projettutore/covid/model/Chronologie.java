@@ -3,6 +3,7 @@ package com.projettutore.covid.model;
 import com.projettutore.covid.exeption.ChronologieException;
 import com.projettutore.covid.exeption.FormulaireExeption;
 import com.projettutore.covid.managers.FileManager;
+import com.projettutore.covid.managers.PropertiesManager;
 
 import java.io.File;
 import java.io.Serializable;
@@ -56,7 +57,7 @@ public class Chronologie implements Serializable {
         for(Map.Entry mapentry : chronologieHashMap.entrySet()) {
             if(((Date) mapentry.getKey()).compareTo(event.getDateEvent()) == 0) {
                 System.out.println("exeption");
-                throw new ChronologieException("date deja existante");
+                throw new ChronologieException(PropertiesManager.getElement("messagebugDate"));
             }
         }
         if(event.getDateEvent().compareTo(startDate) == 1 && event.getDateEvent().compareTo(endDate) == -1) {

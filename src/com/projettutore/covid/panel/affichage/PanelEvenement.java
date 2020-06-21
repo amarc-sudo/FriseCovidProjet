@@ -1,4 +1,4 @@
-package com.projettutore.covid.panel.covid;
+package com.projettutore.covid.panel.affichage;
 
 import com.projettutore.covid.managers.FileManager;
 import com.projettutore.covid.model.Date;

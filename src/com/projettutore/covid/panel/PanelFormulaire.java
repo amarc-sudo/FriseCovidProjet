@@ -1,4 +1,4 @@
-package com.projettutore.covid.panel.selection;
+package com.projettutore.covid.panel;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;

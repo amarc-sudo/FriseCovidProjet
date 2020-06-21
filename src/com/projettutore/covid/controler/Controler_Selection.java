@@ -8,11 +8,10 @@ import com.projettutore.covid.exeption.FormulaireExeption;
 import com.projettutore.covid.frame.FrameCovid;
 import com.projettutore.covid.managers.FileManager;
 import com.projettutore.covid.model.Chronologie;
-import com.projettutore.covid.model.Event;
-import com.projettutore.covid.panel.covid.PanelCovid;
+import com.projettutore.covid.panel.PanelCovid;
 import com.projettutore.covid.panel.selection.PanelCreation;
 import com.projettutore.covid.panel.selection.PanelFile;
-import com.projettutore.covid.panel.selection.PanelFormulaire;
+import com.projettutore.covid.panel.PanelFormulaire;
 import com.projettutore.covid.panel.selection.PanelSelection;
 
 import javax.swing.JOptionPane;

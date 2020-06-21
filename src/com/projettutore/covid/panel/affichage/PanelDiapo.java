@@ -1,13 +1,10 @@
-package com.projettutore.covid.panel.covid;
+package com.projettutore.covid.panel.affichage;
 
 import com.projettutore.covid.controler.Controler_Covid;
 import com.projettutore.covid.model.Chronologie;
-import com.projettutore.covid.model.Date;
-import com.projettutore.covid.model.Event;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
 
 /**
  * Classe permetant de representer les evenements sous la forme d'un diaporama.

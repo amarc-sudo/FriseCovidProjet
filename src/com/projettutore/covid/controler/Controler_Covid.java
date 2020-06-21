@@ -6,13 +6,12 @@ import java.io.File;
 
 import com.projettutore.covid.exeption.ChronologieException;
 import com.projettutore.covid.exeption.FormulaireExeption;
-import com.projettutore.covid.managers.FileManager;
 import com.projettutore.covid.model.Chronologie;
-import com.projettutore.covid.panel.covid.PanelCovid;
-import com.projettutore.covid.panel.covid.PanelDiapo;
-import com.projettutore.covid.panel.covid.PanelNavigationEvenement;
-import com.projettutore.covid.panel.selection.PanelFormulaire;
-import com.projettutore.covid.panel.covid.PanelFrise;
+import com.projettutore.covid.panel.PanelCovid;
+import com.projettutore.covid.panel.affichage.PanelDiapo;
+import com.projettutore.covid.panel.affichage.PanelNavigationEvenement;
+import com.projettutore.covid.panel.PanelFormulaire;
+import com.projettutore.covid.panel.affichage.PanelFrise;
 import com.projettutore.covid.panel.selection.PanelFile;
 
 import javax.swing.JFileChooser;

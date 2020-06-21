@@ -1,18 +1,15 @@
-package com.projettutore.covid.panel.covid;
+package com.projettutore.covid.panel.affichage;
 
-import com.projettutore.covid.controler.Controler_Covid;
 import com.projettutore.covid.model.Chronologie;
 import com.projettutore.covid.model.Date;
 import com.projettutore.covid.model.Event;
 
 import java.awt.CardLayout;
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 import javax.swing.JPanel;
 

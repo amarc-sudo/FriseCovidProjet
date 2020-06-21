@@ -1,11 +1,8 @@
-package com.projettutore.covid.panel.covid;
+package com.projettutore.covid.panel;
 
-import com.projettutore.covid.controler.Controler_Covid;
-import com.projettutore.covid.controler.Controler_Selection;
 import com.projettutore.covid.frame.FrameCovid;
 import com.projettutore.covid.model.Chronologie;
-import com.projettutore.covid.panel.selection.PanelCreation;
-import com.projettutore.covid.panel.selection.PanelFormulaire;
+import com.projettutore.covid.panel.affichage.PanelAffichage;
 import com.projettutore.covid.panel.selection.PanelSelection;
 
 import javax.swing.*;

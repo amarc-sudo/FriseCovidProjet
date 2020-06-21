@@ -1,4 +1,4 @@
-package com.projettutore.covid.panel.covid;
+package com.projettutore.covid.panel.affichage;
 
 import javax.swing.table.DefaultTableModel;
 
