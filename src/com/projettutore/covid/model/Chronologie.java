@@ -1,7 +1,13 @@
 package com.projettutore.covid.model;
 
+import com.projettutore.covid.exeption.ChronologieException;
+import com.projettutore.covid.exeption.FormulaireExeption;
+import com.projettutore.covid.managers.FileManager;
+
+import java.io.File;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -38,20 +44,21 @@ public class Chronologie implements Serializable {
      * @param event
      * @return
      */
-    public boolean add(Event event){
-        if (this.chronologieHashMap.containsKey(event.getDateEvent())){
-            return false;
+    public boolean add(Event event) throws ChronologieException {
+        for(Map.Entry mapentry : chronologieHashMap.entrySet()) {
+            if(((Date) mapentry.getKey()).compareTo(event.getDateEvent()) == 0) {
+                System.out.println("exeption");
+                throw new ChronologieException("date deja existante");
+            }
+        }
+        if(event.getDateEvent().compareTo(startDate) == 1 && event.getDateEvent().compareTo(endDate) == -1) {
+            this.chronologieHashMap.put(event.getDateEvent(), event);
+            FileManager.save(titleChronologie, this);
+            return true;
         }
         else{
-            System.out.println(event.getDateEvent());
-            System.out.println(endDate);
-            System.out.println(event.getDateEvent().compareTo(endDate));
-            if(event.getDateEvent().compareTo(startDate) == 1 && event.getDateEvent().compareTo(endDate) == -1) {
-                this.chronologieHashMap.put(event.getDateEvent(), event);
-                return true;
+            throw new ChronologieException(("hors de la date du début ou de fin de la chronologie"));
             }
-            else return false;
-        }
     }
 
     public TreeMap<Date, Event> getTreeEvent(){

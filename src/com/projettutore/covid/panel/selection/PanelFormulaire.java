@@ -4,12 +4,16 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
 import com.projettutore.covid.controler.Controler_Covid;
 import com.projettutore.covid.controler.Controler_Selection;
+import com.projettutore.covid.exeption.FormulaireExeption;
+import com.projettutore.covid.managers.FileManager;
+import com.projettutore.covid.managers.PropertiesManager;
 import com.projettutore.covid.model.Chronologie;
 import com.projettutore.covid.model.Date;
 import com.projettutore.covid.model.Event;
@@ -33,7 +37,7 @@ public class PanelFormulaire extends JPanel {
 	private JLabel JL_Description = new JLabel("Description",JLabel.CENTER);
 	private JLabel JL_Location = new JLabel("Lieu",JLabel.CENTER);
 
-	private PanelSelection panelSelectionFormulaire;
+	private Controler_Selection controlerSelectionFormulaire;
 
 	private JComboBox JCB_Year ;
 	private JComboBox JCB_Month ;
@@ -66,7 +70,6 @@ public class PanelFormulaire extends JPanel {
 		gbc.gridx = 1;
 		gbc.gridwidth = 3;
 		add(JTF_Title,gbc);
-
 		//FIN DE LA LIGNE 1
 			
 		//LIGNE 2
@@ -108,27 +111,33 @@ public class PanelFormulaire extends JPanel {
 		add(JTA_Description,gbc);
 		//FIN DE LA LIGNE 5
 
-		//debut ligne 6
-		gbc.gridx = 0;
-		gbc.gridy = 6;
-		gbc.gridwidth = 3;
-		this.add(JB_end, gbc);
-		//FIN LIGNE 6
 		//debut nommage event
-		JB_end.setActionCommand("endEvent");
 		JB_Plus.setActionCommand("addEvent");
-		this.setBackground(Color.BLACK);
-		panelSelectionFormulaire = new PanelSelection(this);
-		}
+	}
 
-		public void recordListener (Controler_Selection parControler) {
-			JB_Plus.addActionListener(parControler);
-			JB_end.addActionListener(parControler);
+	public void recordListener (Controler_Covid parControler) {
+		JB_Plus.addActionListener(parControler);
+		JB_end.addActionListener(parControler);
+	}
+	public Event getEvent() throws FormulaireExeption {
+		if(JTF_Location.getText().isEmpty()){
+			throw new FormulaireExeption(PropertiesManager.getElement("messagebugPathImg"));
 		}
-		
-		public Event getEvent() {
-			return new Event(new Date((int)JCB_Day.getSelectedItem(), (int)JCB_Month.getSelectedItem(), (int)JCB_Year.getSelectedItem()), JTF_Title.getText(), JTA_Description.getText(),JTF_Location.getText());
+		else if(JTF_Title.getText().isEmpty()){
+			throw new FormulaireExeption(PropertiesManager.getElement("messagebugTitre"));
 		}
+		else if(JTA_Description.getText().isEmpty()){
+			throw new FormulaireExeption(PropertiesManager.getElement("messagebugDescrition"));
+		}
+		else {
+			File img = new File(JTF_Location.getText());
+			FileManager.copier(img);
+			Event event = new Event(new Date((int) JCB_Day.getSelectedItem(), (int) JCB_Month.getSelectedItem(), (int) JCB_Year.getSelectedItem()), JTF_Title.getText(), JTA_Description.getText(), img.getName());
+			System.out.println(event.toStringHtml());
+			return event;
+		}
+	}
+
 		public void createYearMonthDay() {
 		JCB_Year = new JComboBox();
 		JCB_Month = new JComboBox();

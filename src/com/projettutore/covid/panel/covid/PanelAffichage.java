@@ -1,5 +1,9 @@
 package com.projettutore.covid.panel.covid;
 
+import com.projettutore.covid.controler.Controler_Covid;
+import com.projettutore.covid.exeption.ChronologieException;
+import com.projettutore.covid.exeption.FormulaireExeption;
+import com.projettutore.covid.frame.FrameCovid;
 import com.projettutore.covid.model.Chronologie;
 import com.projettutore.covid.model.Date;
 import com.projettutore.covid.model.Event;
@@ -15,13 +19,23 @@ public class PanelAffichage extends JPanel {
     private PanelDiapo panelDiapo;
     private PanelFrise panelFrise;
     private Chronologie chronologie;
-    public PanelAffichage(Chronologie chronologie){
+    private Controler_Covid controler_covid;
+    public PanelAffichage(Chronologie chronologie, PanelCovid panelCovid){
         this.chronologie = chronologie;
-        this.setLayout(new BorderLayout());
-        chronologie.add(new Event(new Date(22,12,2005), "coucou", "coucou", "coucou"));
+        this.setLayout(new GridLayout(2,1));
         panelDiapo = new PanelDiapo(chronologie);
         panelFrise = new PanelFrise();
         this.add(panelDiapo, BorderLayout.NORTH);
         this.add(panelFrise, BorderLayout.SOUTH);
+        try {
+            this.controler_covid = new Controler_Covid(panelDiapo, panelFrise, panelCovid.getPanelFormulaire(), chronologie);
+        } catch (ChronologieException e) {
+            e.printStackTrace();
+        } catch (FormulaireExeption formulaireExeption) {
+            formulaireExeption.printStackTrace();
+        }
+    }
+    public PanelDiapo getPanelDiapo(){
+        return panelDiapo;
     }
 }

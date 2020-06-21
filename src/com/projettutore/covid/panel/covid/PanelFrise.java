@@ -7,4 +7,5 @@ import javax.swing.*;
 public class PanelFrise extends JPanel {
     private JTable jTable_Chronologie;
     private Chronologie chronologie;
+
 }

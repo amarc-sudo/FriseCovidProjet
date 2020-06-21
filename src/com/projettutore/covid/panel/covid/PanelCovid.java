@@ -1,5 +1,7 @@
 package com.projettutore.covid.panel.covid;
 
+import com.projettutore.covid.controler.Controler_Covid;
+import com.projettutore.covid.controler.Controler_Selection;
 import com.projettutore.covid.frame.FrameCovid;
 import com.projettutore.covid.model.Chronologie;
 import com.projettutore.covid.panel.selection.PanelCreation;
@@ -27,6 +29,10 @@ public class PanelCovid extends JPanel implements ActionListener {
      */
     private Chronologie chronologie;
 
+    PanelAffichage panelAffichage ;
+    PanelFormulaire panelFormulaire ;
+    PanelSelection panelSelection;
+
     /**
      * Constructeur de base de la classe
      */
@@ -35,12 +41,12 @@ public class PanelCovid extends JPanel implements ActionListener {
         cardLayout = new CardLayout();
         setLayout(cardLayout);
         this.setVisible(true);
-        PanelAffichage panelAffichage = new PanelAffichage(chronologie);
-        //PanelFormulaire panelFormulaire = new PanelFormulaire();
-        PanelSelection panelSelection = new PanelSelection(frameCovid);
+        panelFormulaire = new PanelFormulaire(chronologie);
+        panelAffichage = new PanelAffichage(chronologie, this);
+        panelSelection = new PanelSelection(frameCovid);
         this.add(panelAffichage, "menu2");
         this.add(panelSelection, "menu1");
-        //Controler_Covid controler = new Controler_Covid(panelDiapo, panelFormulaire,panelFrise);
+        this.add(panelFormulaire, "menu4");
         //this.setBackground(Color.WHITE);
     }
 
@@ -65,6 +71,10 @@ public class PanelCovid extends JPanel implements ActionListener {
         this.chronologie = chronologie;
     }
 
+    public PanelFormulaire getPanelFormulaire(){
+        return panelFormulaire;
+    }
+
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String eventName = actionEvent.getActionCommand();
@@ -73,7 +83,9 @@ public class PanelCovid extends JPanel implements ActionListener {
 
             case "1": cardLayout.show(this, "menu1");
                 break;
-            case "2": cardLayout.show(this, "menu2");
+            case "2":
+                panelAffichage.getPanelDiapo().getPanelNavigationEvenement().refresh();
+                cardLayout.show(this, "menu2");
                 break;
             case "3": int saisi = JOptionPane.showConfirmDialog (
                     this,
@@ -89,6 +101,7 @@ public class PanelCovid extends JPanel implements ActionListener {
                     case JOptionPane.CANCEL_OPTION:
 
                 }
+            case "4": cardLayout.show(this, "menu4");
         }
     }
 

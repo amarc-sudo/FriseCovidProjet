@@ -2,7 +2,11 @@ package com.projettutore.covid.managers;
 
 import com.projettutore.covid.model.Chronologie;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.filechooser.FileSystemView;
+
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -23,6 +27,41 @@ public class FileManager {
      * fichier documents
      */
     private static File f = fsv.getDefaultDirectory();
+
+    /**
+     * Methode static qui permet de copier un element dans le dossier de l'application
+     * @param source
+     * @return
+     */
+    public static boolean copier(File source) {
+        if(!(new File(f.toString() +"\\ProjetCovid\\" + source.getName()).exists())) {
+            try (InputStream sourceFile = new java.io.FileInputStream(source);
+                 OutputStream destinationFile = new FileOutputStream(new File(f.toString() + "\\ProjetCovid\\" + source.getName()))) {
+                // Lecture par segment de 0.5Mo
+                byte buffer[] = new byte[512 * 1024];
+                int nbLecture;
+                while ((nbLecture = sourceFile.read(buffer)) != -1) {
+                    destinationFile.write(buffer, 0, nbLecture);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false; // Erreur
+            }
+            return true; // Résultat OK
+        }
+        return true;
+    }
+
+    /**
+     * methode statique qui permet de charger une image dans le dossier documents
+     * @param name
+     * @return
+     * @throws IOException
+     */
+    public static BufferedImage loadImage(String name) throws IOException {
+        System.out.println(new File(f.toString() + File.separator +"ProjetCovid"+ File.separator + name).exists());
+        return ImageIO.read(new File(f.toString() + File.separator +"ProjetCovid"+ File.separator + name));
+    }
 
     /**
      * Methode de lecture d'un fichier serialisez. Si le nom du fichier n'existe pas alors il crée une nouvelle chronologie

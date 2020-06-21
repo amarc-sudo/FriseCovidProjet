@@ -3,14 +3,19 @@ package com.projettutore.covid.controler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import com.projettutore.covid.exeption.ChronologieException;
+import com.projettutore.covid.exeption.FormulaireExeption;
 import com.projettutore.covid.frame.FrameCovid;
 import com.projettutore.covid.managers.FileManager;
 import com.projettutore.covid.model.Chronologie;
+import com.projettutore.covid.model.Event;
 import com.projettutore.covid.panel.covid.PanelCovid;
 import com.projettutore.covid.panel.selection.PanelCreation;
 import com.projettutore.covid.panel.selection.PanelFile;
 import com.projettutore.covid.panel.selection.PanelFormulaire;
 import com.projettutore.covid.panel.selection.PanelSelection;
+
+import javax.swing.JOptionPane;
 
 /**
 	 * @author Slimanitz
@@ -40,10 +45,6 @@ import com.projettutore.covid.panel.selection.PanelSelection;
 			panelCreation.recoredListener(this);
 			panelFile.recordListener(this);
 		}
-		public Controler_Selection(PanelFormulaire panelFormulaire){
-			this.panelFormulaire = panelFormulaire;
-			panelFormulaire.recordListener(this);
-		}
 		
 		
 		
@@ -62,22 +63,18 @@ import com.projettutore.covid.panel.selection.PanelSelection;
 			}
 			if(e.getActionCommand() == "add"){
 				chronologie = panelCreation.getNewChronologie();
-				panelSelection.removeAll();
-				frameCovid.getContentPane().removeAll();
-				panelFormulaire = new PanelFormulaire(chronologie);
-				panelFormulaire.recordListener(this);
-				panelSelection.add(panelFormulaire);
-				panelFormulaire.setVisible(true);
-				frameCovid.setContentPane(panelSelection);
-			}
-			if(e.getActionCommand() == "addEvent"){
-				chronologie.add(panelFormulaire.getEvent());
-			}
-			if(e.getActionCommand() == "endEvent"){
 				PanelCovid panelCovid = new PanelCovid(chronologie, frameCovid);
-				FileManager.save(chronologie.getTitle(), chronologie);
 				frameCovid.setCovidPane(chronologie, panelCovid);
 			}
+
+			try {
+				if (e.getActionCommand() == "addEvent") {
+					chronologie.add(panelFormulaire.getEvent());
+				}
+			}catch (ChronologieException | FormulaireExeption fE){
+				JOptionPane.showMessageDialog(null, fE);
+			}
+
 			if(e.getActionCommand() == "year1"){
 				panelCreation.changeDay(panelCreation.getMonth1(), panelCreation.getYear1(), true);
 			}

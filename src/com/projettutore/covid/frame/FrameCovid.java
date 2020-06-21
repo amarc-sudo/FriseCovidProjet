@@ -50,9 +50,9 @@ public class FrameCovid extends JFrame {
 	}
 
 	public void createMenu(PanelCovid contentPane){
-    	items = new JMenuItem[3];
+    	items = new JMenuItem[4];
     	String name = "";
-    	for(int i = 0 ; i < 3 ; i++){
+    	for(int i = 0 ; i < 4 ; i++){
 			name = "menu" + (i+1);
 			items[i] = new JMenuItem(PropertiesManager.getElement(name));
 			items[i].setActionCommand(""+(i+1));

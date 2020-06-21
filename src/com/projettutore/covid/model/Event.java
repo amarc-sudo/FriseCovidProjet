@@ -1,6 +1,7 @@
 package com.projettutore.covid.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 /**
@@ -23,7 +24,29 @@ public class Event implements Comparable<Event>, Serializable {
 
     @Override
     public int compareTo(Event event) {
-        return 0;
+        if(dateEvent.compareTo(event.getDateEvent()) == 1)
+            return 1;
+        else if (dateEvent.compareTo(event.getDateEvent()) == -1){
+            return -1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        System.out.println("coucou");
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return dateEvent.equals(event.dateEvent);
+    }
+
+    @Override
+    public int hashCode() {
+        System.out.println("coucou");
+        return Objects.hash(dateEvent);
     }
 
     public Date getDateEvent() {

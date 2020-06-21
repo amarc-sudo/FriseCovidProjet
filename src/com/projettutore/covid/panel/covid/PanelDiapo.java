@@ -1,5 +1,6 @@
 package com.projettutore.covid.panel.covid;
 
+import com.projettutore.covid.controler.Controler_Covid;
 import com.projettutore.covid.model.Chronologie;
 import com.projettutore.covid.model.Date;
 import com.projettutore.covid.model.Event;
@@ -14,11 +15,6 @@ import java.util.*;
  */
 public class PanelDiapo extends JPanel {
 
-    /**
-     * Liste de paneaux evenements
-     * @see ArrayList
-     */
-    private ArrayList<PanelEvenement> panelEvenements;
 
     /**
      *
@@ -27,27 +23,34 @@ public class PanelDiapo extends JPanel {
     /**
      *
      */
-    private CardLayout cardLayout;
+    private BorderLayout borderLayout;
+    private PanelNavigationEvenement panelNavigationEvenement;
+    private JButton jButton_Left;
+    private JButton jButton_right;
+    private Controler_Covid controlerCovid;
     /**
      *
      * @param chronologie
      */
     public PanelDiapo(Chronologie chronologie){
-        cardLayout = new CardLayout();
-        panelEvenements = new ArrayList<>();
-        this.setLayout(cardLayout);
+        this.panelNavigationEvenement = panelNavigationEvenement;
         this.chronologie = chronologie;
-        TreeMap<Date, Event> dateEventTreeMap = chronologie.getTreeEvent();
-        Set set = dateEventTreeMap.entrySet();
-        Iterator iterator = set.iterator();
-        while(iterator.hasNext()){
-            System.out.println("coucou");
-            Map.Entry mapEntry = (Map.Entry)iterator.next();
-            panelEvenements.add(new PanelEvenement((Event)mapEntry.getValue()));
-        }
-        for(int i = 0 ; i < panelEvenements.size() ; i++){
-            this.add(panelEvenements.get(i));
-        }
+        this.panelNavigationEvenement = new PanelNavigationEvenement(chronologie);
+        this.borderLayout = new BorderLayout();
+        this.setLayout(borderLayout);
+        jButton_Left = new JButton("previous");
+        jButton_right = new JButton("next");
+        this.add(panelNavigationEvenement, BorderLayout.CENTER);
+        this.add(jButton_Left, BorderLayout.WEST);
+        this.jButton_Left.setActionCommand("leftButton");
+        this.add(jButton_right, BorderLayout.EAST);
+        this.jButton_right.setActionCommand("rightButton");
     }
-
+    public PanelNavigationEvenement getPanelNavigationEvenement(){
+        return panelNavigationEvenement;
+    }
+    public void recordListener(Controler_Covid controlerCovid){
+        jButton_right.addActionListener(controlerCovid);
+        jButton_Left.addActionListener(controlerCovid);
+    }
 }
