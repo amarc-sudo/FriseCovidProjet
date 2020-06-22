@@ -56,7 +56,6 @@ public class Chronologie implements Serializable {
     public boolean add(Event event) throws ChronologieException {
         for(Map.Entry mapentry : chronologieHashMap.entrySet()) {
             if(((Date) mapentry.getKey()).compareTo(event.getDateEvent()) == 0) {
-                System.out.println("exeption");
                 throw new ChronologieException(PropertiesManager.getElement("messagebugDate"));
             }
         }

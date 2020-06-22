@@ -124,15 +124,6 @@ public class PanelCreation extends JPanel {
 		JCB_Day_2.addActionListener(parControler);
 		JB_Add.addActionListener(parControler);
 	}
-	public void recordListenerCovid(Controler_Covid parControler) {
-		JCB_Year_1.addActionListener(parControler);
-		JCB_Month_1.addActionListener(parControler);
-		JCB_Day_1.addActionListener(parControler);
-		JCB_Year_2.addActionListener(parControler);
-		JCB_Month_2.addActionListener(parControler);
-		JCB_Day_2.addActionListener(parControler);
-		JB_Add.addActionListener(parControler);
-	}
 
 	public Chronologie getNewChronologie(){
 		Date debut = new Date((int)JCB_Day_1.getSelectedItem(), (int)JCB_Month_1.getSelectedItem(), (int)JCB_Year_1.getSelectedItem());
@@ -155,13 +146,14 @@ public class PanelCreation extends JPanel {
 			JCB_Day_1.addItem(i);
 			JCB_Day_2.addItem(i);
 		}
+		JCB_Month_2.setSelectedIndex(11);
+		JCB_Day_2.setSelectedIndex(30);
 	}
+
 	public void changeDay(int month, int year, boolean jComboBox){
 		if(jComboBox){
-			System.out.println(month);
 			JCB_Day_1.removeAllItems();
 			for(int i = 1 ; i <= Date.dayInAMonth(month, year); i++){
-				System.out.println(i);
 				JCB_Day_1.addItem(i);
 			}
 		}

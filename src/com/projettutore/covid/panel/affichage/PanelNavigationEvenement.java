@@ -54,7 +54,6 @@ public class PanelNavigationEvenement extends JPanel {
         Iterator iterator = set.iterator();
         while(iterator.hasNext()){
             Map.Entry mapEntry = (Map.Entry)iterator.next();
-            System.out.println(((Event)mapEntry.getValue()).getDateEvent().toString());
             PanelEvenement panelEvenement = new PanelEvenement((Event)mapEntry.getValue(), chronologie.getTitle());
             panelEvenements.add(panelEvenement);
             this.add(panelEvenement);

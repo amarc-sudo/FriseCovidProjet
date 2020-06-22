@@ -34,6 +34,7 @@ public class Controler_Covid implements ActionListener{
 	private PanelFrise panelFrise;
 	private PanelNavigationEvenement panelNavigationEvenement;
 	private Chronologie chronologie;
+	private Boolean changementYear;
 	/**
 	 * @param parPanelDiapo
 	 * @param parPanelFrise
@@ -45,6 +46,7 @@ public class Controler_Covid implements ActionListener{
 		this.panelFrise = parPanelFrise;
 		this.panelDiapo.recordListener(this);
 		this.chronologie = chronologie;
+		this.changementYear = false;
 		/*
 		panelFrise.recordListener(this);*/
 		panelFormulaire.recordListener(this);
@@ -79,6 +81,16 @@ public class Controler_Covid implements ActionListener{
 				File selected = jfc.getSelectedFile();
 				panelFormulaire.getJTF_Location().setText(selected.getAbsolutePath());
 			}
+		}
+		if(e.getActionCommand() == "year"){
+			changementYear = true;
+			panelFormulaire.changeMonth();
+			changementYear = false;
+			panelFormulaire.changeDay(panelFormulaire.getMonth(), panelFormulaire.getYear());
+		}
+
+		if(e.getActionCommand() == "month" && !changementYear){
+			panelFormulaire.changeDay(panelFormulaire.getMonth(), panelFormulaire.getYear());
 		}
 
 	}

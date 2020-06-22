@@ -69,7 +69,6 @@ public class Event implements Comparable<Event>, Serializable {
             int i = 0;
             while (st.hasMoreTokens() && i < 12) {
                 descriptionHtml += st.nextToken() + " ";
-                System.out.println(i);
                 if(i == 11){
                     descriptionHtml+=" <br> ";
                     i=0;

@@ -59,7 +59,6 @@ public class FileManager {
      * @throws IOException
      */
     public static BufferedImage loadImage(String name, String filesName) throws IOException {
-        System.out.println(new File(f.toString() + File.separator +"ProjetCovid"+ File.separator + filesName+ File.separator + name).exists());
         return ImageIO.read(new File(f.toString() + File.separator +"ProjetCovid"+ File.separator + filesName+ File.separator + name));
     }
 

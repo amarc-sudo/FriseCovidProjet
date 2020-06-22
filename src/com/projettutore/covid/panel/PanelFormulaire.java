@@ -140,6 +140,8 @@ public class PanelFormulaire extends JPanel {
 		JB_Plus.addActionListener(parControler);
 		JB_end.addActionListener(parControler);
 		JB_ImportPicture.addActionListener(parControler);
+		JCB_Year.addActionListener(parControler);
+		JCB_Month.addActionListener(parControler);
 	}
 
 	public Event getEvent() throws FormulaireExeption {
@@ -167,7 +169,6 @@ public class PanelFormulaire extends JPanel {
 		for(int i = chronologie.getStartDate().getYear() ; i <= chronologie.getEndDate().getYear() ; i++){
 			JCB_Year.addItem(i);
 		}
-		JCB_Year.setSelectedIndex(1);
 		for(int i = 1 ; i < 13 ; i++){
 			JCB_Month.addItem(i);
 		}
@@ -181,9 +182,34 @@ public class PanelFormulaire extends JPanel {
 
 	public void changeDay(int month, int year){
 		JCB_Day.removeAllItems();
-		for(int i = 1 ; i <= Date.dayInAMonth(month, year); i++){
-			System.out.println(i);
-			JCB_Day.addItem(i);
+		if((int)JCB_Year.getSelectedItem() == chronologie.getStartDate().getYear() && (int)JCB_Month.getSelectedItem() == chronologie.getStartDate().getMonth()) {
+			for (int i = chronologie.getStartDate().getDay(); i <= Date.dayInAMonth(month, year); i++) {
+				JCB_Day.addItem(i);
+			}
+		}
+		else if((int)JCB_Year.getSelectedItem() == chronologie.getEndDate().getYear() && (int)JCB_Month.getSelectedItem() == chronologie.getEndDate().getMonth()) {
+			for (int i = 1; i <= chronologie.getEndDate().getDay(); i++) {
+				JCB_Day.addItem(i);
+			}
+		}
+		else {
+			for (int i = 1; i <= Date.dayInAMonth(month, year); i++) {
+				JCB_Day.addItem(i);
+			}
+		}
+	}
+	public void changeMonth(){
+		if((int)JCB_Year.getSelectedItem() == chronologie.getStartDate().getYear()){
+			JCB_Month.removeAllItems();
+			for(int i = chronologie.getStartDate().getMonth() ; i < 13 ; i++){
+				JCB_Month.addItem(i);
+			}
+		}
+		else if((int)JCB_Year.getSelectedItem() == chronologie.getEndDate().getYear()){
+			JCB_Month.removeAllItems();
+			for(int i = 1 ; i <= chronologie.getEndDate().getMonth() ; i++){
+				JCB_Month.addItem(i);
+			}
 		}
 	}
 
