@@ -1,6 +1,7 @@
 package com.projettutore.covid.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 /**
@@ -13,17 +14,32 @@ public class Event implements Comparable<Event>, Serializable {
     private String title;
     private String description;
     private String pathToImg;
+    private int poids;
 
-    public Event(Date dateEvent, String title, String description, String pathToImg) {
+    public Event(Date dateEvent, String title, String description, String pathToImg, int poids) {
         this.dateEvent = dateEvent;
         this.title = title;
         this.description = description;
         this.pathToImg = pathToImg;
+        this.poids = poids;
     }
 
     @Override
     public int compareTo(Event event) {
-        return 0;
+        return dateEvent.compareTo(event.getDateEvent());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return dateEvent.equals(event.dateEvent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dateEvent);
     }
 
     public Date getDateEvent() {
@@ -52,11 +68,12 @@ public class Event implements Comparable<Event>, Serializable {
             StringTokenizer st = new StringTokenizer(description);
             int i = 0;
             while (st.hasMoreTokens() && i < 12) {
-                descriptionHtml += st.nextToken();
+                descriptionHtml += st.nextToken() + " ";
                 if(i == 11){
-                    descriptionHtml+="<br>";
+                    descriptionHtml+=" <br> ";
                     i=0;
                 }
+                i++;
             }
         }
         returnStatement += " " + descriptionHtml;

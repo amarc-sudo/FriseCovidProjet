@@ -1,8 +1,11 @@
-package com.projettutore.covid.panel;
+package com.projettutore.covid.panel.selection;
 
+import com.projettutore.covid.controler.Controler_Selection;
 import com.projettutore.covid.managers.FileManager;
+import com.projettutore.covid.managers.PropertiesManager;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -30,21 +33,31 @@ public class PanelFile extends JPanel {
 
     public PanelFile(){
         //debut initialisation de la liste
+        this.setLayout(new BorderLayout());
         listModelChronologie = new DefaultListModel();
         listSave = FileManager.chronologieListe();
         String save;
         for(int i = 0; i < listSave.size() ; i++){
             listModelChronologie.addElement(listSave.get(i));
         }
-
         JList_Chronologie = new JList<String>(listModelChronologie);
         JList_Chronologie.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane listScrollPane = new JScrollPane(JList_Chronologie);
-        this.add(listScrollPane);
+        this.add(listScrollPane, BorderLayout.CENTER);
         //fin initialisation de la liste
         //debut initialisation des boutons
-        buttonLoad = new JButton("charger");
-        this.add(buttonLoad);
+        buttonLoad = new JButton(PropertiesManager.getElement("boutonPanelFile"));
+        buttonLoad.setActionCommand("load");
+        this.add(buttonLoad, BorderLayout.SOUTH);
         //fin initialisation des boutons
+    }
+    
+    
+    public void  recordListener(Controler_Selection parControler) {
+    	buttonLoad.addActionListener(parControler);
+    }
+
+    public String getSelectedSave(){
+        return JList_Chronologie.getSelectedValue();
     }
 }
